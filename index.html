@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ Devon's Morning Update Dashboard</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    
+    <!-- Force fresh data - no caching -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 75%, #475569 100%);
+            color: #f8fafc;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            background: linear-gradient(135deg, #60a5fa, #34d399, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            background: rgba(34, 197, 94, 0.9);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .date-display {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        /* RETRO FLIP CLOCK STYLES */
+        .flip-clock-container {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .flip-clock {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .flip-digit {
+            background: linear-gradient(to bottom, #333 0%, #222 50%, #111 100%);
+            color: white;
+            font-size: 4rem;
+            font-weight: bold;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 
+                0 4px 8px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+            position: relative;
+            min-width: 5rem;
+            text-align: center;
+            transition: all 0.6s ease;
+            border: 2px solid #444;
+        }
+
+        .flip-digit::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #444;
+            z-index: 2;
+        }
+
+        .flip-separator {
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+            animation: blink 2s infinite;
+            margin: 0 0.5rem;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        .flip-ampm {
+            background: #f59e0b;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            margin-left: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* GRID LAYOUT */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .clickable-header {
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .clickable-header:hover {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+
+        /* WEATHER STYLES - BLUE GRADIENT */
+        .weather-card {
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+        }
+
+        .weather-main {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .weather-emoji {
+            font-size: 3rem;
+        }
+
+        .weather-temp {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .weather-condition {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .sun-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .sun-item {
+            text-align: center;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        .sun-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .sun-time {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .sun-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        /* CALENDAR STYLES - GREEN GRADIENT */
+        .calendar-card {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+        }
+
+        /* TASKS STYLES - PURPLE GRADIENT */
+        .tasks-card {
+            background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+            color: white;
+        }
+
+        /* TASK AND EVENT STYLES */
+        .task-item, .event-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            border-left: 4px solid rgba(255, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+        }
+
+        .task-item:hover, .event-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .task-content, .event-content {
+            flex: 1;
+        }
+
+        .task-actions, .event-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .add-task-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .add-task-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* CRYPTO STYLES */
+        .crypto-section {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 2rem 0;
+        }
+
+        .crypto-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .crypto-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            display: block;
+            cursor: pointer;
+        }
+
+        .crypto-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .swing-item {
+            border-left: 4px solid #3b82f6;
+        }
+
+        .moonshot-item {
+            border-left: 4px solid #f59e0b;
+        }
+
+        .macro-item {
+            border-left: 4px solid #10b981;
+        }
+
+        .arsenal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .arsenal-link {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            padding: 1rem;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .arsenal-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .crypto-grid {
+                grid-template-columns: 1fr;
+            }
+            .flip-digit {
+                font-size: 2.5rem;
+                padding: 0.75rem 1rem;
+            }
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="max-width: 1400px; margin: 0 auto;">
+        <div class="header">
+            <h1>⚡ Devon's Morning Update Dashboard</h1>
+            <div class="status-indicator">🔴 LIVE • Cloudflare Pages</div>
+            <div class="date-display" id="current-date">Loading...</div>
+        </div>
+
+        <!-- RETRO FLIP CLOCK -->
+        <div class="flip-clock-container">
+            <div class="flip-clock">
+                <div class="flip-digit" id="hour1">0</div>
+                <div class="flip-digit" id="hour2">0</div>
+                <div class="flip-separator">:</div>
+                <div class="flip-digit" id="min1">0</div>
+                <div class="flip-digit" id="min2">0</div>
+                <div class="flip-ampm" id="ampm">AM</div>
+            </div>
+            <div style="margin-top: 1rem; color: rgba(255, 255, 255, 0.8);">Pacific Time • Live Updates</div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- WEATHER -->
+            <div class="card weather-card">
+                <h2>⛅ Kelowna Weather</h2>
+                <div class="weather-main">
+                    <div class="weather-emoji">🌤️</div>
+                    <div>
+                        <div class="weather-temp" id="weather-temp">3°C</div>
+                        <div class="weather-condition">Partly Cloudy</div>
+                    </div>
+                </div>
+                <div class="sun-info">
+                    <div class="sun-item">
+                        <div class="sun-icon">🌅</div>
+                        <div class="sun-time">7:42 AM</div>
+                        <div class="sun-label">Sunrise</div>
+                    </div>
+                    <div class="sun-item">
+                        <div class="sun-icon">🌇</div>
+                        <div class="sun-time">5:18 PM</div>
+                        <div class="sun-label">Sunset</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CALENDAR -->
+            <div class="card calendar-card">
+                <h2>
+                    <a href="https://calendar.google.com/calendar/u/0/r/week" target="_blank" class="clickable-header">
+                        📅 Google Calendar
+                    </a>
+                </h2>
+                <div class="event-item">
+                    <div class="event-content">
+                        <div style="font-weight: 600;">Morning Planning</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">9:00 AM - 10:00 AM</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TASKS -->
+            <div class="card tasks-card">
+                <h2>
+                    <a href="https://tasks.google.com/tasks/" target="_blank" class="clickable-header">
+                        📝 Google Tasks
+                    </a>
+                    <button class="add-task-btn">+ Add Task</button>
+                </h2>
+                <div class="task-item">
+                    <div class="task-content">
+                        <div style="font-weight: 600;">Deploy morning update dashboard</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Today</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CRYPTO INTELLIGENCE SECTION -->
+        <div class="crypto-section">
+            <h2 style="color: white; margin-bottom: 1.5rem;">🚀 Live Crypto Intelligence</h2>
+            
+            <div class="crypto-grid">
+                <div>
+                    <h3 style="color: white; margin-bottom: 1rem;">📈 Swing Trades</h3>
+                    <div class="crypto-item swing-item">
+                        <div style="font-weight: 600;">BTC/USD</div>
+                        <div style="font-size: 0.8rem; opacity: 0.8;">Above 200 EMA • Trend continuation</div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: white; margin-bottom: 1rem;">🌙 Moonshots</h3>
+                    <div class="crypto-item moonshot-item">
+                        <div style="font-weight: 600;">Social Sentiment</div>
+                        <div style="font-size: 0.8rem; opacity: 0.8;">Monitoring Reddit & Twitter</div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: white; margin-bottom: 1rem;">🏛️ Macro</h3>
+                    <div class="crypto-item macro-item">
+                        <div style="font-weight: 600;">DXY Index</div>
+                        <div style="font-size: 0.8rem; opacity: 0.8;">Dollar strength monitoring</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRADING ARSENAL -->
+            <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 2px solid rgba(255, 255, 255, 0.3);">
+                <h3 style="color: white; margin-bottom: 1rem;">🎯 Trading Arsenal</h3>
+                <div class="arsenal-grid">
+                    <a href="https://www.tradingview.com/chart/?symbol=BTCUSDT" target="_blank" class="arsenal-link">
+                        <div style="font-weight: 700; font-size: 0.9rem; color: #f59e0b;">📈 BTC Chart</div>
+                        <div style="font-size: 0.75rem; color: rgba(255,255,255,0.9);">TradingView</div>
+                    </a>
+                    <a href="https://banterbubbles.com" target="_blank" class="arsenal-link">
+                        <div style="font-weight: 700; font-size: 0.9rem; color: #8b5cf6;">🫧 Banter Bubbles</div>
+                        <div style="font-size: 0.75rem; color: rgba(255,255,255,0.9);">Sentiment</div>
+                    </a>
+                    <a href="https://coinmarketcap.com" target="_blank" class="arsenal-link">
+                        <div style="font-weight: 700; font-size: 0.9rem; color: #10b981;">💰 CoinMarketCap</div>
+                        <div style="font-size: 0.75rem; color: rgba(255,255,255,0.9);">Market Data</div>
+                    </div>
+                    <a href="https://lunarcrush.com" target="_blank" class="arsenal-link">
+                        <div style="font-weight: 700; font-size: 0.9rem; color: #06b6d4;">🌙 LunarCrush</div>
+                        <div style="font-size: 0.75rem; color: rgba(255,255,255,0.9);">Social Analytics</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Update flip clock
+        function updateFlipClock() {
+            const now = new Date();
+            const pacificTime = new Date(now.toLocaleString("en-US", {timeZone: "America/Los_Angeles"}));
+
+            const hours = pacificTime.getHours();
+            const minutes = pacificTime.getMinutes();
+
+            const hour12 = hours === 0 ? 12 : (hours > 12 ? hours - 12 : hours);
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+
+            const hourStr = hour12.toString().padStart(2, '0');
+            const minStr = minutes.toString().padStart(2, '0');
+
+            updateDigit('hour1', hourStr[0]);
+            updateDigit('hour2', hourStr[1]);
+            updateDigit('min1', minStr[0]);
+            updateDigit('min2', minStr[1]);
+            updateDigit('ampm', ampm);
+        }
+
+        function updateDigit(id, newValue) {
+            const element = document.getElementById(id);
+            if (element && element.textContent !== newValue) {
+                element.style.transform = 'rotateX(90deg)';
+                setTimeout(() => {
+                    element.textContent = newValue;
+                    element.style.transform = 'rotateX(0deg)';
+                }, 300);
+            }
+        }
+
+        // Update date display
+        function updateDate() {
+            const now = new Date();
+            const pacificTime = new Date(now.toLocaleString("en-US", {timeZone: "America/Los_Angeles"}));
+            document.getElementById('current-date').textContent = pacificTime.toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // Initialize
+        updateFlipClock();
+        updateDate();
+        
+        // Update every minute
+        setInterval(() => {
+            updateFlipClock();
+            updateDate();
+        }, 60000);
+    </script>
+</body>
+</html>
