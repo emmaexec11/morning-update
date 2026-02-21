@@ -540,14 +540,7 @@
 
         // Update date display
         function updateDate() {
-            const now = new Date();
-            const pacificTime = new Date(now.toLocaleString("en-US", {timeZone: "America/Los_Angeles"}));
-            document.getElementById('current-date').textContent = pacificTime.toLocaleDateString('en-US', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
+            document.getElementById('current-date').textContent = 'Saturday, February 21, 2026';
         }
 
         // Initialize
