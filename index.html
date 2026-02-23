@@ -898,6 +898,22 @@
                 return data.access_token;
             } catch (error) {
                 console.error('Token refresh failed:', error);
+                // Show user-friendly error in the tasks section
+                const tasksContent = document.getElementById('tasks-content');
+                if (tasksContent) {
+                    tasksContent.innerHTML = `
+                        <div style="color: #ff6b6b; text-align: center; padding: 1rem;">
+                            <div style="font-size: 1.1rem; margin-bottom: 0.5rem;">⚠️ Google Tasks Token Expired</div>
+                            <div style="font-size: 0.9rem; margin-bottom: 1rem;">Your authentication has expired for security.</div>
+                            <a href="https://emmaexec11.github.io/morning-update/" 
+                               target="_blank" 
+                               style="display: inline-block; background: #4285f4; color: white; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; font-size: 0.9rem;">
+                                Click here to re-authenticate
+                            </a>
+                            <div style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.8;">Opens in new tab</div>
+                        </div>
+                    `;
+                }
                 throw error;
             }
         }
@@ -1100,8 +1116,24 @@
                 
             } catch (error) {
                 console.error('Tasks loading failed:', error);
-                document.getElementById('task-list').innerHTML = 
-                    `<div style="color: rgba(255,100,100,0.8);">Warning: Tasks error: ${error.message}<br><small>Click header to view online</small></div>`;
+                const isTokenError = error.message && error.message.includes('Token refresh failed');
+                document.getElementById('task-list').innerHTML = isTokenError
+                    ? `<div style="color: rgba(255,200,100,0.9); padding: 0.5rem;">
+                        <div style="font-weight: 600; margin-bottom: 0.3rem;">⚠️ Google authentication expired</div>
+                        <div style="font-size: 0.9rem;">Click the <strong>"📝 Google Tasks"</strong> header above to open Google Tasks online and re-authenticate, then refresh this page.</div>
+                       </div>`
+                    : error.message.includes('Token refresh failed') 
+                        ? `<div style="color: #ff6b6b; text-align: center; padding: 1rem;">
+                            <div style="font-size: 1.1rem; margin-bottom: 0.5rem;">⚠️ Google Tasks Token Expired</div>
+                            <div style="font-size: 0.9rem; margin-bottom: 1rem;">Your authentication has expired for security.</div>
+                            <a href="https://emmaexec11.github.io/morning-update/" 
+                               target="_blank" 
+                               style="display: inline-block; background: #4285f4; color: white; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; font-size: 0.9rem;">
+                                Click here to re-authenticate
+                            </a>
+                            <div style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.8;">Opens in new tab</div>
+                           </div>`
+                        : `<div style="color: rgba(255,100,100,0.8);">Warning: Tasks error: ${error.message}<br><small>Click header to view online</small></div>`;
             }
         }
 
@@ -2608,8 +2640,6 @@
         setInterval(loadSwingTradingData, 420000); // Refresh swing trading every 7 minutes
         setInterval(loadMoonshotData, 900000); // Refresh moonshots every 15 minutes
         
-        // Initialize sticky notes
-        loadStickyNotes();
     </script>
 
     <!-- STICKY NOTES SECTION - Individual Bubbles -->
@@ -2814,6 +2844,11 @@
                 saveStickyNotes();
             }
         }
+        
+        // Initialize sticky notes when page loads
+        window.addEventListener('DOMContentLoaded', function() {
+            loadStickyNotes();
+        });
     </script>
 </body>
 </html>
