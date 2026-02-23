@@ -860,11 +860,11 @@
         }
 
         // Google API Functions
-        // Auto-refreshing OAuth token system
+        // Auto-refreshing OAuth token system with localStorage persistence
         const GOOGLE_CREDENTIALS = {
             'client_id': '310221293117-eiv0ouknutm3mjchgio5ceopf9hvbnr8.apps.googleusercontent.com',
             'client_secret': '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',
-            'refresh_token': '1//06pZHENOSKxTXCgYIARAAGAYSNwF-L9IraZ1g-rP258FGkJOF1SWOYKmkrDmMeJXKwbzyvjCGPbwGf8KyR0z0CS-su0Mxz90JPpc'
+            'refresh_token': localStorage.getItem('google_refresh_token') || '1//06pZHENOSKxTXCgYIARAAGAYSNwF-L9IraZ1g-rP258FGkJOF1SWOYKmkrDmMeJXKwbzyvjCGPbwGf8KyR0z0CS-su0Mxz90JPpc'
         };
 
         async function refreshAccessToken() {
