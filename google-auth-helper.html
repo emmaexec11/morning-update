@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Tasks Authentication Helper</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f172a;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+        }
+        button {
+            background: #4285f4;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 1rem;
+        }
+        button:hover {
+            background: #357ae8;
+        }
+        .success {
+            background: #10b981;
+        }
+        .code-block {
+            background: rgba(0,0,0,0.5);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-family: monospace;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Google Tasks Authentication</h1>
+        
+        <div id="step1">
+            <p>This helper will get you a long-lasting refresh token for Google Tasks.</p>
+            <button onclick="startAuth()">Start Authentication</button>
+        </div>
+        
+        <div id="step2" style="display: none;">
+            <p>Click below to authorize with Google:</p>
+            <button onclick="window.open(authUrl, '_blank')">Authorize with Google</button>
+            <p style="margin-top: 2rem;">After authorizing, you'll see a code. Paste it here:</p>
+            <input type="text" id="authCode" placeholder="Paste authorization code" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; background: rgba(0,0,0,0.3); border: 1px solid #4285f4; color: white; border-radius: 4px;">
+            <button onclick="exchangeCode()">Get Refresh Token</button>
+        </div>
+        
+        <div id="step3" style="display: none;">
+            <h2>✅ Success!</h2>
+            <p>Your refresh token (save this!):</p>
+            <div class="code-block" id="refreshToken"></div>
+            <button class="success" onclick="copyToken()">Copy Token</button>
+            <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">This token will last for months/years unless you revoke it.</p>
+        </div>
+        
+        <div id="error" style="display: none; color: #ff6b6b;">
+            <p id="errorMsg"></p>
+        </div>
+    </div>
+
+    <script>
+        const CLIENT_ID = '310221293117-eiv0ouknutm3mjchgio5ceopf9hvbnr8.apps.googleusercontent.com';
+        const CLIENT_SECRET = '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';
+        const REDIRECT_URI = 'urn:ietf:wg:oauth:2.0:oob';
+        const SCOPES = [
+            'https://www.googleapis.com/auth/tasks.readonly',
+            'https://www.googleapis.com/auth/calendar.readonly'
+        ];
+        
+        let authUrl;
+        
+        function startAuth() {
+            authUrl = `https://accounts.google.com/o/oauth2/v2/auth?` +
+                `client_id=${CLIENT_ID}&` +
+                `redirect_uri=${encodeURIComponent(REDIRECT_URI)}&` +
+                `response_type=code&` +
+                `scope=${encodeURIComponent(SCOPES.join(' '))}&` +
+                `access_type=offline&` +
+                `prompt=consent`;
+            
+            document.getElementById('step1').style.display = 'none';
+            document.getElementById('step2').style.display = 'block';
+        }
+        
+        async function exchangeCode() {
+            const code = document.getElementById('authCode').value.trim();
+            if (!code) {
+                showError('Please paste the authorization code');
+                return;
+            }
+            
+            try {
+                const response = await fetch('https://oauth2.googleapis.com/token', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        code: code,
+                        client_id: CLIENT_ID,
+                        client_secret: CLIENT_SECRET,
+                        redirect_uri: REDIRECT_URI,
+                        grant_type: 'authorization_code'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.refresh_token) {
+                    document.getElementById('step2').style.display = 'none';
+                    document.getElementById('step3').style.display = 'block';
+                    document.getElementById('refreshToken').textContent = data.refresh_token;
+                    
+                    // Save to localStorage for the dashboard
+                    localStorage.setItem('google_refresh_token', data.refresh_token);
+                    localStorage.setItem('google_token_updated', new Date().toISOString());
+                } else {
+                    showError('No refresh token received. Make sure to click "Allow" for offline access.');
+                }
+            } catch (error) {
+                showError('Failed to exchange code: ' + error.message);
+            }
+        }
+        
+        function copyToken() {
+            const token = document.getElementById('refreshToken').textContent;
+            navigator.clipboard.writeText(token);
+            alert('Token copied to clipboard!');
+        }
+        
+        function showError(msg) {
+            document.getElementById('error').style.display = 'block';
+            document.getElementById('errorMsg').textContent = msg;
+        }
+    </script>
+</body>
+</html>
