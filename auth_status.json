@@ -1,0 +1,6 @@
+{
+  "timestamp": "2026-04-03T05:07:41.755893",
+  "status": "Google Auth Required",
+  "message": "Google Calendar/Tasks authentication expired Feb 28. Run: ./fix-google-auth.sh",
+  "days_broken": 34
+}
