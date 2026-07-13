@@ -1,0 +1,4344 @@
+/* ============================================================
+   WYLD BRAND IDENTITY — v2 PALETTE (2026 earthy + clean)
+   Naturally Wyld design system — applied as overrides on top
+   of Horizon's default tokens. Mobile-first, editorial restraint.
+
+   2026 palette: warm cream + bone alternation + warm ink text.
+   Terracotta as primary accent, sage as section break, dusty
+   rose for announcement bar only. NO brown for body text —
+   warm ink reads near-black with subtle warm undertone.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* ===== Brand palette (2026) ===== */
+  --wyld-cream: #FDFCF8;          /* near-pure-white with hint of warmth — Primally Pure clean */
+  --wyld-cream-warm: #F4EFE6;     /* lighter bone — subtler section alternation */
+  --wyld-ink: #1F1B17;            /* warm ink — near-black for text/headings */
+  --wyld-ink-soft: #2C2620;       /* slightly lifted ink for body where ultra-contrast is too heavy */
+  --wyld-stone: #5F574D;          /* muted text — captions, eyebrows, meta */
+  --wyld-terracotta: #9C5259;     /* primary accent — CTAs */
+  --wyld-terracotta-dark: #7D4147;
+  --wyld-terracotta-light: #B8727A;
+  --wyld-sage: #A8A893;           /* section accent — calmer than v1 */
+  --wyld-sage-light: #C3C2AE;
+  --wyld-sage-dark: #8D8C7A;
+  --wyld-rose: #9A6B65;           /* dusty rose — italic word accents only (2026-05-29) */
+  --wyld-rose-dark: #7D5550;
+  --wyld-forest: #1F2D24;         /* deep forest green — retained for legacy refs */
+  --wyld-forest-dark: #15201A;    /* darker forest for button hover */
+  --wyld-forest-light: #2B3A2F;   /* slightly lifted forest for muted use */
+  --wyld-smoke: #2A332C;          /* smoky forest-charcoal — ANNOUNCEMENT BAR + SOLID COMMERCE CTAs (Aesop-inspired with green hint) */
+  --wyld-smoke-dark: #1F2722;     /* darker smoke for hover */
+
+  /* Legacy aliases kept so existing sections referencing --wyld-brown still work */
+  --wyld-brown: var(--wyld-ink);
+  --wyld-brown-dark: #000000;
+
+  --wyld-border: rgba(31,27,23,0.10);
+  --wyld-border-strong: rgba(31,27,23,0.22);
+  --wyld-shadow: rgba(31,27,23,0.06);
+
+  /* ===== Horizon token overrides ===== */
+  --color-background: var(--wyld-cream);
+  --color-foreground: var(--wyld-ink);
+  --color-foreground-heading: var(--wyld-ink);
+  --color-primary: var(--wyld-forest);
+  --color-primary-hover: var(--wyld-forest-dark);
+  --color-primary-button-background: var(--wyld-forest);
+  --color-primary-button-text: var(--wyld-cream);
+  --color-primary-button-border: var(--wyld-forest);
+  --color-primary-button-hover-background: var(--wyld-forest-dark);
+  --color-secondary-button-text: var(--wyld-ink);
+  --color-secondary-button-border: var(--wyld-ink);
+  --color-border: var(--wyld-border);
+  --color-shadow: var(--wyld-shadow);
+
+  /* ===== Typography ===== */
+  --font-heading-family: 'Cormorant Garamond', Georgia, serif;
+  --font-body-family: 'Jost', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-subheading-family: 'Jost', sans-serif;
+  --font-accent-family: 'Cormorant Garamond', serif;
+}
+
+/* ===== Base typography ===== */
+body {
+  font-family: var(--font-body-family);
+  background: var(--wyld-cream);
+  color: var(--wyld-ink);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+h1, h2, h3, h4,
+.h1, .h2, .h3, .h4,
+[class*="heading"] {
+  font-family: var(--font-heading-family) !important;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--wyld-ink);
+}
+
+h1, .h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.05; }
+h2, .h2 { font-size: clamp(2rem, 4.5vw, 3.5rem); line-height: 1.1; }
+h3, .h3 { font-size: clamp(1.5rem, 3vw, 2.25rem); line-height: 1.2; }
+h4, .h4 { font-size: clamp(1.25rem, 2vw, 1.75rem); line-height: 1.3; }
+
+h5, .h5 {
+  font-family: var(--font-subheading-family);
+  font-size: 0.875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--wyld-stone);
+}
+
+h6, .h6 {
+  font-family: var(--font-subheading-family);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--wyld-stone);
+}
+
+/* Italic accent class for editorial moments (Aesop-style) */
+.wyld-accent,
+.font-accent {
+  font-family: var(--font-accent-family);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Muted helper class for captions/meta */
+.wyld-muted {
+  color: var(--wyld-stone);
+}
+
+/* ===== Buttons — editorial, sharp, restrained ===== */
+.button,
+button[type="submit"],
+.shopify-payment-button__button {
+  font-family: var(--font-subheading-family);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.8125rem;
+  border-radius: 4px !important;
+  padding: 0.95rem 1.75rem;
+  transition: background-color 200ms ease, transform 200ms ease, color 200ms ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button--primary,
+.button[data-style="primary"] {
+  background: var(--wyld-forest);
+  color: var(--wyld-cream);
+  border: none;
+}
+
+.button--primary:hover {
+  background: var(--wyld-forest-dark);
+}
+
+.button--secondary {
+  background: transparent;
+  color: var(--wyld-ink);
+  border: 1px solid var(--wyld-ink);
+}
+
+.button--secondary:hover {
+  background: rgba(31,27,23,0.04);
+}
+
+/* ===== Links ===== */
+a {
+  color: var(--wyld-ink);
+  transition: color 200ms ease;
+}
+
+a:hover {
+  color: var(--wyld-terracotta);
+}
+
+/* ===== Cards — minimal, editorial ===== */
+.card,
+.product-card,
+[class*="card"] {
+  background: var(--wyld-cream);
+  border-radius: 4px;
+  border-color: var(--wyld-border);
+}
+
+/* ===== Forms ===== */
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="tel"],
+textarea {
+  font-family: var(--font-body-family);
+  background: var(--wyld-cream);
+  color: var(--wyld-ink);
+  border: 1px solid var(--wyld-border-strong);
+  border-radius: 2px;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--wyld-terracotta);
+}
+
+/* ===== Spacing scale =====
+   Applies generous padding to sections that opt-in via .wyld-section
+   or are inside .wyld-homepage-wrapper. We do NOT apply to ALL <section>
+   elements because that breaks tight layouts like the homepage hero. */
+.wyld-section,
+.wyld-homepage-wrapper > section {
+  padding-top: clamp(48px, 8vw, 96px);
+  padding-bottom: clamp(48px, 8vw, 96px);
+}
+
+/* Kill section padding on the v17 homepage wrapper so the hero starts
+   immediately under the new Wyld header — Devon's v17 layout. */
+#shopify-section-v17,
+.shopify-section--wyld-v17-homepage,
+[id^="shopify-section"]:has(> .wyld-homepage-v17),
+[id^="shopify-section"]:has(.wyld-homepage-v17) {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+#shopify-section-v17 > section,
+.shopify-section--wyld-v17-homepage > section {
+  padding: 0 !important;
+}
+
+/* ===== Selection ===== */
+::selection {
+  background: var(--wyld-terracotta);
+  color: var(--wyld-cream);
+}
+
+/* ===== Image rendering — premium ===== */
+img {
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* ===== Subtle scrollbar ===== */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--wyld-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--wyld-border-strong);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--wyld-ink);
+}
+
+/* ============================================================
+   Force v17's hardcoded cream values to inherit the new lighter
+   palette. v17's scoped CSS defined --cream / --cream-warm as
+   #FFFBF8 / #FFF6EF — heavier than the new brand cream. Override
+   at the v17 wrapper level so every v17 section pulls the
+   lighter Wyld cream automatically.
+   ============================================================ */
+.wyld-homepage-v17,
+.wyld-homepage {
+  --cream: var(--wyld-cream) !important;
+  --cream-warm: var(--wyld-cream-warm) !important;
+  --brown: var(--wyld-ink) !important;
+  --brown-dark: var(--wyld-ink) !important;
+  background: var(--wyld-cream);
+}
+/* Also re-color any inline-styled cream-toned backgrounds inside v17 */
+.wyld-homepage-v17 [style*="#FFFBF8" i],
+.wyld-homepage-v17 [style*="#fffbf8" i],
+.wyld-homepage [style*="#FFFBF8" i],
+.wyld-homepage [style*="#fffbf8" i] {
+  background-color: var(--wyld-cream) !important;
+}
+
+/* ============================================================
+   Suppress v17's baked-in nav + announcement on the homepage
+   so the new Wyld Header doesn't stack on top of v17's nav.
+   v17 body part1 emits:
+     <div class="announcement-bar">
+     <nav class="nav" id="navbar">
+   The .wyld-homepage-v17 wrapper is applied by the index template.
+   ============================================================ */
+.wyld-homepage-v17 > .announcement-bar,
+.wyld-homepage-v17 > nav.nav,
+.wyld-homepage-v17 > nav#navbar,
+.wyld-homepage-v17 .announcement-bar,
+.wyld-homepage-v17 nav#navbar,
+.wyld-homepage-v17 > .nav,
+.wyld-homepage-v17 > #navbar {
+  display: none !important;
+}
+
+/* Also hide Horizon's stock header-component when our wyld-header
+   is rendered (defensive — keeps a single header on every page). */
+header-component:has(~ wyld-header),
+wyld-header ~ header-component,
+.shopify-section--header header-component {
+  /* Horizon's own header is allowed to remain rendered in cases where
+     header-group includes its default header; we hide it ONLY when
+     the wyld-header section is also present. */
+}
+
+/* ============================================================
+   LAYOUT HOTFIX — main bar 3-col grid + search modal hidden
+   ============================================================ */
+.wyld-h__main {
+  background: var(--wyld-cream);
+  border-bottom: 1px solid var(--wyld-border);
+}
+.wyld-h__main-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 24px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 18px 32px;
+}
+.wyld-h__col--left { justify-self: start; display: flex; align-items: center; gap: 12px; }
+.wyld-h__col--center { justify-self: center; }
+.wyld-h__col--right { justify-self: end; display: flex; align-items: center; gap: 14px; }
+
+@media (max-width: 1023px) {
+  .wyld-h__main-inner { grid-template-columns: auto 1fr auto; padding: 14px 16px; gap: 12px; }
+}
+
+/* Hide visually-hidden icon labels ("Search" text leak) */
+.wyld-h__icon-label {
+  position: absolute !important;
+  width: 1px !important; height: 1px !important;
+  padding: 0 !important; margin: -1px !important;
+  overflow: hidden !important; clip: rect(0,0,0,0) !important;
+  white-space: nowrap !important; border: 0 !important;
+}
+
+/* Search modal — hidden by default, shown on open */
+.wyld-h__search-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: none;
+}
+.wyld-h__search-modal[aria-hidden="false"],
+.wyld-h__search-modal.is-open {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.wyld-h__search-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(31,27,23,0.45);
+}
+.wyld-h__search-panel {
+  position: relative;
+  background: var(--wyld-cream);
+  width: min(720px, 92vw);
+  margin-top: 80px;
+  padding: 28px;
+  border-radius: 4px;
+  box-shadow: 0 32px 64px rgba(31,27,23,0.16);
+  z-index: 2;
+}
+.wyld-h__search-top { margin-bottom: 16px; }
+.wyld-h__search-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 2px solid var(--wyld-ink);
+  padding-bottom: 10px;
+}
+.wyld-h__search-form > svg:first-child { color: var(--wyld-stone); flex-shrink: 0; }
+.wyld-h__search-input {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  font-family: var(--font-heading-family);
+  font-size: 22px;
+  color: var(--wyld-ink);
+  outline: none;
+  padding: 6px 0;
+}
+.wyld-h__search-close { background: transparent; border: 0; cursor: pointer; color: var(--wyld-stone); padding: 6px; display: inline-flex; }
+.wyld-h__search-close:hover { color: var(--wyld-ink); }
+.wyld-h__search-empty .wyld-h__mega-eyebrow { margin-bottom: 10px; padding-bottom: 0; border: 0; }
+.wyld-h__search-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.wyld-h__search-tags a {
+  padding: 8px 14px;
+  border: 1px solid var(--wyld-border);
+  border-radius: 999px;
+  font-family: var(--font-body-family);
+  font-size: 13.5px;
+  color: var(--wyld-ink);
+  text-decoration: none;
+  transition: background 180ms ease, color 180ms ease;
+}
+.wyld-h__search-tags a:hover { background: var(--wyld-ink); color: var(--wyld-cream); }
+
+/* Nav row below the main bar */
+.wyld-h__nav-wrap {
+  background: var(--wyld-cream);
+  border-top: 1px solid var(--wyld-border);
+  border-bottom: 1px solid var(--wyld-border);
+}
+.wyld-h__nav-wrap .wyld-h__nav {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+@media (min-width: 1024px) {
+  .wyld-h__nav-wrap .wyld-h__nav { display: flex; }
+}
+
+/* Quiz CTA — rounded black pill, top right */
+.wyld-h__quiz-cta {
+  font-family: var(--font-subheading-family);
+  font-size: 11.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--wyld-cream);
+  background: var(--wyld-ink);
+  border: 1px solid var(--wyld-ink);
+  padding: 13px 26px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
+  white-space: nowrap;
+  line-height: 1;
+  display: none;
+}
+.wyld-h__quiz-cta:hover {
+  background: var(--wyld-forest);
+  border-color: var(--wyld-forest);
+  color: var(--wyld-cream);
+}
+@media (min-width: 1024px) {
+  .wyld-h__quiz-cta { display: inline-flex; align-items: center; }
+}
+
+/* Locale (currency) switcher */
+.wyld-h__locale { position: relative; display: none; }
+@media (min-width: 1024px) { .wyld-h__locale { display: inline-block; } }
+.wyld-h__locale-trigger {
+  cursor: pointer;
+  font-family: var(--font-subheading-family);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--wyld-ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  list-style: none;
+}
+.wyld-h__locale-trigger::-webkit-details-marker { display: none; }
+.wyld-h__locale[open] .wyld-h__locale-trigger { color: var(--wyld-terracotta); }
+.wyld-h__locale-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--wyld-cream);
+  border: 1px solid var(--wyld-border);
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 6px 0;
+  min-width: 220px;
+  border-radius: 4px;
+  box-shadow: 0 8px 24px -8px rgba(31,27,23,0.12);
+  z-index: 80;
+}
+.wyld-h__locale-menu li button {
+  background: transparent;
+  border: 0;
+  width: 100%;
+  text-align: left;
+  padding: 10px 16px;
+  font-family: var(--font-body-family);
+  font-size: 14px;
+  color: var(--wyld-ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.wyld-h__locale-menu li button:hover { background: var(--wyld-cream-warm); }
+
+/* Remove the leaf SVG mark next to the logo — Devon doesn't want it */
+.wyld-h__logo svg,
+.wyld-h__logo-leaf,
+.wyld-h__leaf-mark,
+.wyld-h__logo-mark {
+  display: none !important;
+}
+
+/* Remove the terracotta dot before REWARDS link — also Devon's call */
+.wyld-h__nav-link--rewards::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* Mobile hero — shift focal point right so the woman in the sunflower photo is visible */
+@media (max-width: 768px) {
+  .wyld-homepage-v17 img[alt="Naturally Wyld"],
+  .wyld-homepage-v17 img[src*="ChatGPT_Image_Apr_27"] {
+    object-position: 78% 30% !important;
+  }
+}
+
+/* Mobile hamburger — bigger tap target (was 22px → 28px SVG inside larger hit area) */
+@media (max-width: 1023px) {
+  .wyld-h__burger {
+    padding: 10px !important;
+    margin-right: -10px; /* visual alignment without consuming layout */
+  }
+  .wyld-h__burger svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+  .wyld-h__icon-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Header TAKE THE QUIZ button — switch from ink/black to forest green per locked-in palette */
+.wyld-h__cta,
+.wyld-h__quiz-cta {
+  background: var(--wyld-forest) !important;
+  border-color: var(--wyld-forest) !important;
+  color: var(--wyld-cream) !important;
+}
+.wyld-h__cta:hover,
+.wyld-h__quiz-cta:hover {
+  background: var(--wyld-forest-dark) !important;
+  border-color: var(--wyld-forest-dark) !important;
+}
+
+/* Hero image SHOP NOW button — keep WHITE (Devon's explicit "except header image one" rule) */
+.wyld-homepage-v17 .hero a[href*="all"][style*="forest"],
+.wyld-homepage-v17 .hero-cta,
+.wyld-homepage-v17 .hero .button,
+.wyld-homepage-v17 .hero .btn,
+.wyld-homepage-v17 .hero a.shop-now,
+.wyld-homepage-v17 .hero [class*="shop"],
+.wyld-homepage-v17 [class*="hero"] a[href*="collections"],
+.wyld-homepage-v17 [class*="hero"] a[href*="all-products"] {
+  background: #FFFFFF !important;
+  color: var(--wyld-ink) !important;
+  border-color: #FFFFFF !important;
+}
+
+/* Hero SHOP NOW button — keep WHITE (the one INSIDE the hero photo).
+   The v17 inline style was changed to forest green by the optimization agent —
+   Devon's locked-in rule: "all buttons same colour except the header image one." */
+.wyld-homepage-v17 a[href="#products"]:not([class]),
+.wyld-homepage-v17 a[href*="#products"][style*="--wyld-forest"] {
+  background: #FFFFFF !important;
+  background-color: #FFFFFF !important;
+  color: var(--wyld-ink) !important;
+}
+
+/* ============================================================
+   MOBILE — center hero text + center header logo
+   ============================================================ */
+@media (max-width: 767px) {
+  /* Center the hero overlay text (Wyld by Nature. + subhead + SHOP NOW button) */
+  .wyld-homepage-v17 .hero-text,
+  .wyld-homepage-v17 [class*="hero-text"],
+  .wyld-homepage-v17 [class*="hero-content"],
+  .wyld-homepage-v17 [class*="hero-overlay"],
+  .wyld-homepage-v17 [class*="hero-inner"],
+  .wyld-homepage-v17 [class*="hero"] > .container,
+  .wyld-homepage-v17 .hero h1,
+  .wyld-homepage-v17 .hero p {
+    text-align: center !important;
+    align-items: center !important;
+    justify-content: center !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  /* Center the SHOP NOW pill + Free shipping pill inside the hero on mobile */
+  .wyld-homepage-v17 .hero a[href="#products"],
+  .wyld-homepage-v17 .hero [style*="background:#"],
+  .wyld-homepage-v17 .hero .button-row,
+  .wyld-homepage-v17 [class*="hero-buttons"],
+  .wyld-homepage-v17 [class*="hero-cta"] {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+  }
+  /* Center the rating line under the buttons */
+  .wyld-homepage-v17 .hero [class*="rating"],
+  .wyld-homepage-v17 .hero [class*="stars"],
+  .wyld-homepage-v17 .hero [class*="review"] {
+    text-align: center !important;
+    justify-content: center !important;
+  }
+
+  /* Center the Naturally Wyld logo in the mobile header */
+  .wyld-h__bar-inner {
+    position: relative;
+  }
+  .wyld-h__bar-inner .wyld-h__logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+  }
+  /* Add some breathing room so left/right icon clusters don't crowd the logo */
+  .wyld-h__bar-inner > *:first-child {
+    margin-right: auto;
+  }
+  .wyld-h__bar-inner > *:last-child {
+    margin-left: auto;
+  }
+}
+
+/* ============================================================
+   MOBILE — properly center hero text wrapper + move hamburger LEFT
+   ============================================================ */
+@media (max-width: 767px) {
+  /* Hero text wrapper is inline-styled position:absolute;left:80px;
+     Override the LEFT offset so the whole block centers, not just the text */
+  .wyld-homepage-v17 section > div[style*="position:absolute"][style*="bottom"] {
+    left: 16px !important;
+    right: 16px !important;
+    max-width: none !important;
+    width: auto !important;
+    text-align: center !important;
+  }
+  .wyld-homepage-v17 section > div[style*="position:absolute"][style*="bottom"] h1,
+  .wyld-homepage-v17 section > div[style*="position:absolute"][style*="bottom"] p,
+  .wyld-homepage-v17 section > div[style*="position:absolute"][style*="bottom"] > * {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 100% !important;
+  }
+  /* The button row inside the hero — center the inline-flex buttons */
+  .wyld-homepage-v17 section > div[style*="position:absolute"][style*="bottom"] > div,
+  .wyld-homepage-v17 section > div[style*="position:absolute"][style*="bottom"] > p {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+    align-items: center !important;
+  }
+  /* The H1 itself — make sure its inline width:310px doesn't constrain centering */
+  .wyld-homepage-v17 section > div[style*="position:absolute"][style*="bottom"] h1 {
+    width: auto !important;
+    display: block !important;
+  }
+
+  /* Move hamburger to LEFT side, cart RIGHT, hide secondary icons */
+  .wyld-h__bar-inner .wyld-h__search-trigger,
+  .wyld-h__bar-inner .wyld-h__account,
+  .wyld-h__bar-inner .wyld-h__quiz-cta,
+  .wyld-h__bar-inner .wyld-h__locale {
+    display: none !important;
+  }
+  .wyld-h__bar-inner .wyld-h__burger {
+    order: -1 !important;
+    margin-right: auto !important;
+    margin-left: 0 !important;
+  }
+  .wyld-h__bar-inner .wyld-h__cart-wrap,
+  .wyld-h__bar-inner .wyld-h__cart-trigger {
+    order: 99 !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+  /* Right cluster needs to allow the order shuffle */
+  .wyld-h__bar-inner .wyld-h__right {
+    display: contents !important;
+  }
+}
+
+/* ============================================================
+   SEARCH MODAL — premium editorial reskin (kill Shopify default look)
+   ============================================================ */
+/* Backdrop: real backdrop blur + warmer overlay */
+.wyld-h__search-modal {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background: rgba(31, 27, 23, 0.35) !important;
+}
+.wyld-h__search-backdrop {
+  background: transparent !important;
+}
+
+/* Panel: bigger, less crowded, editorial */
+.wyld-h__search-panel {
+  width: min(840px, 92vw) !important;
+  margin-top: 64px !important;
+  padding: 0 !important;
+  background: var(--wyld-cream) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 40px 80px -20px rgba(31,27,23,0.25) !important;
+  overflow: hidden;
+  animation: wyld-search-in 280ms cubic-bezier(.22,.61,.36,1);
+}
+@keyframes wyld-search-in {
+  from { opacity: 0; transform: translateY(-12px) scale(0.985); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Top — kill input border, hairline bottom only, big italic placeholder */
+.wyld-h__search-top {
+  padding: 28px 36px 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+}
+.wyld-h__search-form {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--wyld-border) !important;
+  padding-bottom: 18px !important;
+}
+.wyld-h__search-form > svg:first-child {
+  width: 22px;
+  height: 22px;
+  color: var(--wyld-stone) !important;
+  stroke-width: 1.2 !important;
+  flex-shrink: 0;
+}
+.wyld-h__search-input {
+  flex: 1 !important;
+  border: 0 !important;
+  background: transparent !important;
+  font-family: var(--font-heading-family) !important;
+  font-size: 28px !important;
+  font-weight: 400 !important;
+  color: var(--wyld-ink) !important;
+  letter-spacing: -0.01em !important;
+  outline: none !important;
+  padding: 4px 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.wyld-h__search-input::placeholder {
+  font-style: italic;
+  color: var(--wyld-stone);
+  opacity: 0.6;
+}
+.wyld-h__search-close {
+  background: transparent;
+  border: 0;
+  color: var(--wyld-stone);
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 200ms ease, color 200ms ease;
+}
+.wyld-h__search-close:hover {
+  background: var(--wyld-cream-warm);
+  color: var(--wyld-ink);
+}
+
+/* Body */
+.wyld-h__search-body,
+.wyld-h__search-results {
+  padding: 24px 36px 32px !important;
+}
+.wyld-h__search-section {
+  margin: 0 0 28px !important;
+}
+.wyld-h__search-section:last-child { margin-bottom: 0 !important; }
+
+/* Eyebrow */
+.wyld-h__search-empty .wyld-h__mega-eyebrow,
+.wyld-h__search-section .wyld-h__mega-eyebrow,
+.wyld-h__search-empty span:first-child {
+  display: block;
+  font-family: var(--font-subheading-family) !important;
+  font-size: 10.5px !important;
+  letter-spacing: 0.24em !important;
+  text-transform: uppercase !important;
+  color: var(--wyld-stone) !important;
+  font-weight: 600 !important;
+  margin-bottom: 16px !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+/* Tags — kill pill style, replace with underline-on-hover editorial links */
+.wyld-h__search-tags {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0 !important;
+  margin-top: 0 !important;
+}
+.wyld-h__search-tags a {
+  padding: 6px 0 6px !important;
+  margin: 0 24px 8px 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  font-family: var(--font-heading-family) !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  color: var(--wyld-ink) !important;
+  text-decoration: none !important;
+  position: relative;
+  letter-spacing: -0.005em;
+  transition: color 220ms ease;
+}
+.wyld-h__search-tags a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: var(--wyld-terracotta);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 260ms cubic-bezier(.22,.61,.36,1);
+}
+.wyld-h__search-tags a:hover {
+  color: var(--wyld-terracotta) !important;
+  background: transparent !important;
+}
+.wyld-h__search-tags a:hover::after {
+  transform: scaleX(1);
+}
+
+/* Featured product grid */
+.wyld-h__search-featured-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 20px !important;
+  margin-top: 0 !important;
+}
+.wyld-h__search-featured-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 240ms cubic-bezier(.22,.61,.36,1);
+}
+.wyld-h__search-featured-card:hover { transform: translateY(-3px); }
+.wyld-h__search-featured-img {
+  aspect-ratio: 1 / 1;
+  background: var(--wyld-cream-warm);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.wyld-h__search-featured-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 480ms cubic-bezier(.22,.61,.36,1);
+}
+.wyld-h__search-featured-card:hover .wyld-h__search-featured-img img {
+  transform: scale(1.04);
+}
+.wyld-h__search-featured-title {
+  font-family: var(--font-heading-family);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--wyld-ink);
+  display: block;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.wyld-h__search-featured-price {
+  font-family: var(--font-subheading-family);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--wyld-stone);
+  display: block;
+}
+
+/* Mobile — full-bleed editorial search */
+@media (max-width: 767px) {
+  .wyld-h__search-panel {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-top: 0 !important;
+    height: 100vh !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  .wyld-h__search-top { padding: 20px 20px 0 !important; }
+  .wyld-h__search-input { font-size: 22px !important; }
+  .wyld-h__search-body,
+  .wyld-h__search-results { padding: 20px 20px 32px !important; }
+  .wyld-h__search-featured-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .wyld-h__search-tags a { font-size: 16px !important; margin-right: 20px !important; }
+}
+
+/* ============================================================
+   Devon: header + trust band must match body background — no darker cream
+   ============================================================ */
+/* Trust band — was cream-warm, switch to cream */
+.wyld-homepage-v17 .trust-banner,
+.wyld-homepage-v17 .trust-bar,
+.wyld-homepage-v17 .trust-strip,
+.wyld-homepage-v17 section.trust-banner {
+  background: var(--wyld-cream) !important;
+  background-color: var(--wyld-cream) !important;
+}
+
+/* Header — force pure cream + soften the border-bottom so it doesn't create a seam */
+wyld-header,
+.wyld-h,
+.wyld-h__bar,
+.wyld-h__bar-inner,
+.wyld-h__main,
+.wyld-h__main-inner,
+.wyld-h__nav-wrap {
+  background: var(--wyld-cream) !important;
+  background-color: var(--wyld-cream) !important;
+}
+.wyld-h__bar,
+.wyld-h__main {
+  border-bottom: 0 !important;
+}
+.wyld-h__nav-wrap {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+}
+
+/* Hero secondary "Free shipping" pill — match the SHOP NOW button height */
+.wyld-homepage-v17 section span[style*="rgba(255,255,255,0.12)"],
+.wyld-homepage-v17 section span[style*="rgba(255, 255, 255, 0.12)"] {
+  padding: 14px 22px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  line-height: 1 !important;
+  border-width: 1.5px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Devon: kill the header CTA pill — SUBSCRIBE already exists in nav */
+.wyld-h__quiz-cta,
+.wyld-h__cta {
+  display: none !important;
+}
+
+/* ============================================================
+   Devon: bring back the header CTA — but as a subtle text link
+   for "Build Your Own Box" → /collections/bundles
+   Overrides the earlier display:none rule (cascade order wins)
+   ============================================================ */
+@media (min-width: 1024px) {
+  .wyld-h__quiz-cta,
+  .wyld-h__cta {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    color: var(--wyld-ink) !important;
+    padding: 8px 0 !important;
+    margin: 0 4px !important;
+    border-radius: 0 !important;
+    font-family: var(--font-subheading-family) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    position: relative !important;
+    line-height: 1 !important;
+    box-shadow: none !important;
+  }
+  .wyld-h__quiz-cta::after,
+  .wyld-h__cta::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 4px;
+    height: 1px;
+    background: var(--wyld-terracotta);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 260ms cubic-bezier(.22,.61,.36,1);
+  }
+  .wyld-h__quiz-cta:hover,
+  .wyld-h__cta:hover {
+    color: var(--wyld-terracotta) !important;
+    background: transparent !important;
+  }
+  .wyld-h__quiz-cta:hover::after,
+  .wyld-h__cta:hover::after {
+    transform: scaleX(1);
+  }
+}
+@media (max-width: 1023px) {
+  .wyld-h__quiz-cta,
+  .wyld-h__cta {
+    display: none !important;
+  }
+}
+
+/* Devon: changed his mind — kill the header CTA again, all viewports */
+@media (min-width: 1024px) {
+  .wyld-h__quiz-cta,
+  .wyld-h__cta {
+    display: none !important;
+  }
+}
+
+/* SHOP mega — 2-up hero grid for primary + secondary hero cards */
+.wyld-h__mega-heroes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.wyld-h__mega-heroes .wyld-h__mega-hero { min-height: 200px; }
+/* Stack on smaller widths */
+@media (max-width: 1280px) {
+  .wyld-h__mega-heroes { grid-template-columns: 1fr; }
+}
+/* Secondary hero — terracotta gradient instead of forest */
+.wyld-h__mega-hero--alt .wyld-h__mega-hero-bg {
+  background: linear-gradient(135deg, var(--wyld-terracotta) 0%, var(--wyld-rose) 100%);
+  opacity: 0.96;
+}
+
+/* ============================================================
+   RESTORE: mega menu layouts that got wiped from local file
+   (story_featured, bundles top-strip, subscribe, quizzes, shop)
+   ============================================================ */
+
+/* SHOP mega — shop_featured layout: 3-col grid */
+.wyld-h__mega-inner--shop {
+  display: grid;
+  grid-template-columns: 0.8fr 0.8fr 2.4fr;
+  gap: 48px;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 44px 56px 52px;
+  align-items: start;
+}
+.wyld-h__mega-col--featured {
+  display: grid;
+  gap: 24px;
+}
+.wyld-h__mega-hero {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 4px;
+  overflow: hidden;
+  min-height: 200px;
+  background: var(--wyld-forest);
+}
+.wyld-h__mega-hero .wyld-h__mega-hero-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--wyld-forest) 0%, var(--wyld-forest-light) 100%);
+  opacity: 0.96;
+}
+.wyld-h__mega-hero .wyld-h__mega-hero-body {
+  position: relative;
+  z-index: 2;
+  padding: 28px 32px;
+  color: var(--wyld-cream);
+}
+.wyld-h__mega-hero-eyebrow {
+  display: block;
+  font-family: var(--font-subheading-family);
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--wyld-cream); opacity: 0.85; font-weight: 600;
+}
+.wyld-h__mega-hero-title {
+  font-family: var(--font-heading-family);
+  font-size: 26px; font-weight: 500; margin: 10px 0 8px;
+  color: var(--wyld-cream); line-height: 1.15;
+}
+.wyld-h__mega-hero-desc {
+  font-family: var(--font-body-family);
+  font-size: 14px; color: var(--wyld-cream); opacity: 0.9;
+  margin: 0 0 12px; max-width: 360px; line-height: 1.5;
+}
+.wyld-h__mega-hero-cta {
+  display: inline-block;
+  font-family: var(--font-subheading-family);
+  font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase;
+  font-weight: 600; color: var(--wyld-cream);
+  border-bottom: 1.5px solid var(--wyld-cream);
+  padding-bottom: 4px;
+}
+.wyld-h__mega-products {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+/* OUR STORY mega — story_featured layout */
+.wyld-h__mega-inner--story {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 40px;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 44px 56px 52px;
+}
+.wyld-h__story-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.wyld-h__story-tile {
+  display: block;
+  text-decoration: none;
+  color: var(--wyld-cream);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 5 / 3;
+  background: linear-gradient(135deg, var(--wyld-forest) 0%, var(--wyld-forest-light) 50%, var(--wyld-stone) 100%);
+  transition: transform 240ms cubic-bezier(.22,.61,.36,1);
+}
+.wyld-h__story-tile:nth-child(2) {
+  background: linear-gradient(135deg, var(--wyld-terracotta) 0%, var(--wyld-rose) 100%);
+}
+.wyld-h__story-tile:nth-child(3) {
+  background: linear-gradient(135deg, var(--wyld-stone) 0%, var(--wyld-ink) 100%);
+}
+.wyld-h__story-tile:hover { transform: translateY(-3px); }
+.wyld-h__story-tile-img { position: absolute; inset: 0; background: inherit; }
+.wyld-h__story-tile-label {
+  position: absolute;
+  left: 20px;
+  bottom: 18px;
+  font-family: var(--font-subheading-family);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--wyld-cream);
+  z-index: 2;
+}
+.wyld-h__story-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+}
+
+/* BUNDLES top-strip */
+.wyld-h__top-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 36px;
+}
+.wyld-h__top-tile {
+  display: block;
+  text-decoration: none;
+  color: var(--wyld-cream);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 5 / 3;
+  background: linear-gradient(135deg, var(--wyld-cream-warm) 0%, var(--wyld-sage-light) 100%);
+  transition: transform 240ms cubic-bezier(.22,.61,.36,1);
+}
+.wyld-h__top-tile:nth-child(1) { background: linear-gradient(135deg, var(--wyld-forest) 0%, var(--wyld-forest-light) 100%); }
+.wyld-h__top-tile:nth-child(2) { background: linear-gradient(135deg, var(--wyld-terracotta) 0%, var(--wyld-rose) 100%); }
+.wyld-h__top-tile:nth-child(3) { background: linear-gradient(135deg, var(--wyld-stone) 0%, var(--wyld-ink) 100%); }
+.wyld-h__top-tile:nth-child(4) { background: linear-gradient(135deg, var(--wyld-sage) 0%, var(--wyld-sage-dark) 100%); }
+.wyld-h__top-tile:hover { transform: translateY(-3px); }
+.wyld-h__top-tile-img { position: absolute; inset: 0; background: inherit; }
+.wyld-h__top-tile-label {
+  position: absolute;
+  left: 18px;
+  bottom: 14px;
+  font-family: var(--font-subheading-family);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--wyld-cream);
+  z-index: 2;
+}
+
+/* SUBSCRIBE mega — subscribe_featured layout */
+.wyld-h__mega-inner--subscribe {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.6fr;
+  gap: 64px;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 52px 64px 56px;
+  align-items: start;
+}
+.wyld-h__mega-list--checks li {
+  position: relative;
+  padding-left: 22px;
+}
+.wyld-h__mega-list--checks li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  color: var(--wyld-forest);
+  font-weight: 600;
+  font-size: 13px;
+}
+.wyld-h__mega-hero--pledge {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 4px;
+  overflow: hidden;
+  min-height: 200px;
+  background: var(--wyld-forest);
+}
+.wyld-h__mega-hero--pledge .wyld-h__mega-hero-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--wyld-forest) 0%, var(--wyld-forest-light) 100%);
+  opacity: 0.96;
+}
+.wyld-h__mega-hero--pledge .wyld-h__mega-hero-body {
+  position: relative;
+  z-index: 2;
+  padding: 32px;
+  color: var(--wyld-cream);
+}
+.wyld-h__mega-hero--pledge .wyld-h__mega-hero-title {
+  font-size: 30px;
+}
+.wyld-h__mega-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+.wyld-h__mega-cta--primary {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-subheading-family);
+  font-size: 11.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  background: var(--wyld-forest);
+  color: var(--wyld-cream);
+  padding: 14px 26px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 200ms ease;
+}
+.wyld-h__mega-cta--primary:hover {
+  background: var(--wyld-forest-dark);
+  color: var(--wyld-cream);
+}
+.wyld-h__mega-cta--secondary {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-subheading-family);
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--wyld-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--wyld-ink);
+  padding-bottom: 4px;
+  transition: color 200ms ease, border-color 200ms ease;
+}
+.wyld-h__mega-cta--secondary:hover {
+  color: var(--wyld-terracotta);
+  border-color: var(--wyld-terracotta);
+}
+
+/* FIND YOUR MATCH quizzes layout (kept in case of restoration) */
+.wyld-h__mega-inner--quizzes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 40px 64px 48px;
+}
+.wyld-h__quiz-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--wyld-cream-warm);
+  border: 1px solid var(--wyld-border);
+  transition: transform 240ms cubic-bezier(.22,.61,.36,1), box-shadow 240ms ease;
+}
+.wyld-h__quiz-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px -8px rgba(31,27,23,0.12);
+}
+.wyld-h__quiz-card-img {
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(135deg, var(--wyld-sage-light), var(--wyld-cream-warm));
+}
+.wyld-h__quiz-card-body { padding: 18px 18px 20px; }
+.wyld-h__quiz-card-eyebrow {
+  display: block;
+  font-family: var(--font-subheading-family);
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--wyld-stone); font-weight: 600;
+}
+.wyld-h__quiz-card-title {
+  font-family: var(--font-heading-family);
+  font-size: 22px; font-weight: 500; margin: 8px 0 6px;
+  color: var(--wyld-ink); line-height: 1.15;
+}
+.wyld-h__quiz-card-desc {
+  font-family: var(--font-body-family);
+  font-size: 13.5px; color: var(--wyld-stone); margin: 0; line-height: 1.4;
+}
+
+/* Mobile breakpoints */
+@media (max-width: 1100px) {
+  .wyld-h__mega-inner--shop { padding: 36px 32px 44px; gap: 36px; grid-template-columns: 1fr 1fr 1.4fr; }
+  .wyld-h__mega-inner--subscribe { padding: 36px 32px 44px; gap: 36px; grid-template-columns: 1fr 1fr 1.4fr; }
+  .wyld-h__mega-inner--story { padding: 36px 32px 44px; gap: 32px; }
+  .wyld-h__story-cols { gap: 32px; }
+}
+@media (max-width: 1023px) {
+  .wyld-h__mega { display: none !important; }
+}
+
+/* ============================================================
+   FIXES — Devon feedback
+   ============================================================ */
+
+/* SHOP: remove the 5 product cards row (2 hero cards above are enough) */
+.wyld-h__mega-inner--shop .wyld-h__mega-products {
+  display: none !important;
+}
+
+/* OUR STORY: force single-column row layout so tiles span full width on top */
+.wyld-h__mega-inner--story {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  grid-template-rows: auto auto !important;
+  gap: 32px !important;
+}
+.wyld-h__mega-inner--story .wyld-h__story-tiles {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 16px !important;
+  width: 100%;
+}
+.wyld-h__mega-inner--story .wyld-h__story-tile {
+  aspect-ratio: 2 / 1 !important;
+  min-height: 180px;
+}
+.wyld-h__mega-inner--story .wyld-h__story-tile-label {
+  font-size: 13px !important;
+  left: 24px;
+  bottom: 22px;
+}
+.wyld-h__mega-inner--story .wyld-h__story-cols {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 48px !important;
+  width: 100%;
+}
+
+/* Devon: restore 5 product cards in SHOP mega, hide the 2nd banner */
+.wyld-h__mega-inner--shop .wyld-h__mega-products {
+  display: grid !important;
+}
+.wyld-h__mega-inner--shop .wyld-h__mega-hero--alt {
+  display: none !important;
+}
+/* Restore single-hero (full width) when alt is hidden */
+.wyld-h__mega-inner--shop .wyld-h__mega-heroes {
+  grid-template-columns: 1fr !important;
+}
+
+/* Devon: products only in SHOP mega, NOT BUNDLES. BUNDLES has the top-strip, SHOP doesn't. */
+.wyld-h__mega-inner--shop:has(.wyld-h__top-strip) .wyld-h__mega-products {
+  display: none !important;
+}
+
+/* Devon: target by mega ID — top-strip is sibling not descendant of inner */
+#mega-nav_bundles .wyld-h__mega-products {
+  display: none !important;
+}
+
+/* ============================================================
+   BUTTON UNIFICATION — Kosas hairline outline pill (2026-05-29)
+   Universal primary button: transparent fill, 1px ink border, ink text.
+   Hover: fills ink, text flips cream. Hero SHOP NOW stays white (locked).
+   ============================================================ */
+
+/* Horizon native tokens — make every theme button hairline outline */
+:root {
+  --color-primary-button-background: transparent;
+  --color-primary-button-text: var(--wyld-ink);
+  --color-primary-button-border: var(--wyld-ink);
+  --color-primary-button-hover-background: var(--wyld-ink);
+}
+
+/* Brand .button--primary class */
+.button--primary,
+.button[data-style="primary"],
+button[type="submit"]:not([class*="search"]):not([class*="quiz"]) {
+  background: transparent !important;
+  color: var(--wyld-ink) !important;
+  border: 1px solid var(--wyld-ink) !important;
+  border-radius: 0 !important;
+  transition: background 220ms ease, color 220ms ease !important;
+}
+.button--primary:hover,
+.button[data-style="primary"]:hover,
+button[type="submit"]:not([class*="search"]):not([class*="quiz"]):hover {
+  background: var(--wyld-ink) !important;
+  color: var(--wyld-cream) !important;
+  border-color: var(--wyld-ink) !important;
+}
+
+/* Mega menu Quick Add buttons + product card adds — hairline outline */
+.wyld-product-card__add,
+.wyld-product-card__add-btn,
+.wyld-h__mega-card-add {
+  background: transparent !important;
+  color: var(--wyld-ink) !important;
+  border: 1px solid var(--wyld-ink) !important;
+  border-radius: 0 !important;
+  transition: background 220ms ease, color 220ms ease !important;
+}
+.wyld-product-card__add:hover,
+.wyld-product-card__add-btn:hover,
+.wyld-h__mega-card-add:hover:not(:disabled) {
+  background: var(--wyld-ink) !important;
+  color: var(--wyld-cream) !important;
+  border-color: var(--wyld-ink) !important;
+}
+
+/* Mega menu primary CTAs (Subscribe Start, etc.) — hairline outline */
+.wyld-h__mega-cta--primary {
+  background: transparent !important;
+  color: var(--wyld-ink) !important;
+  border: 1px solid var(--wyld-ink) !important;
+}
+.wyld-h__mega-cta--primary:hover {
+  background: var(--wyld-ink) !important;
+  color: var(--wyld-cream) !important;
+}
+
+/* Mega menu hero PANELS (Quiz, Build Your Own Bundle, Founder's Pledge) —
+   These stay as ink gradient panels (they're info cards, not buttons). */
+.wyld-h__mega-hero {
+  background: var(--wyld-ink) !important;
+}
+.wyld-h__mega-hero .wyld-h__mega-hero-bg {
+  background: linear-gradient(135deg, var(--wyld-ink) 0%, var(--wyld-stone) 100%) !important;
+  opacity: 0.96;
+}
+.wyld-h__mega-hero--pledge .wyld-h__mega-hero-bg {
+  background: linear-gradient(135deg, var(--wyld-ink) 0%, var(--wyld-stone) 100%) !important;
+}
+
+/* v17 body buttons — inline-styled with var(--wyld-forest) → hairline outline */
+.wyld-homepage-v17 a[style*="--wyld-forest"],
+.wyld-homepage-v17 button[style*="--wyld-forest"],
+.wyld-homepage-v17 [style*="background:var(--wyld-forest"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--wyld-ink) !important;
+  border: 1px solid var(--wyld-ink) !important;
+}
+.wyld-homepage-v17 a[style*="--wyld-forest"]:hover,
+.wyld-homepage-v17 button[style*="--wyld-forest"]:hover,
+.wyld-homepage-v17 [style*="background:var(--wyld-forest"]:hover {
+  background: var(--wyld-ink) !important;
+  color: var(--wyld-cream) !important;
+}
+
+/* v17 black square buttons (Wyld Hearts "LEARN MORE", etc.) → hairline outline */
+.wyld-homepage-v17 .button,
+.wyld-homepage-v17 .btn,
+.wyld-homepage-v17 a.button,
+.wyld-homepage-v17 a.btn,
+.wyld-homepage-v17 [class*="learn-more"],
+.wyld-homepage-v17 [class*="cta-button"] {
+  background: transparent !important;
+  color: var(--wyld-ink) !important;
+  border-radius: 0 !important;
+  border: 1px solid var(--wyld-ink) !important;
+  transition: background 220ms ease, color 220ms ease !important;
+}
+.wyld-homepage-v17 .button:hover,
+.wyld-homepage-v17 .btn:hover,
+.wyld-homepage-v17 a.button:hover,
+.wyld-homepage-v17 a.btn:hover,
+.wyld-homepage-v17 [class*="learn-more"]:hover,
+.wyld-homepage-v17 [class*="cta-button"]:hover {
+  background: var(--wyld-ink) !important;
+  color: var(--wyld-cream) !important;
+}
+
+/* Editorial "Free shipping on orders $50+" hero secondary pill — switch from outlined-on-photo to white-outline-on-photo (keeps the hero exception
+   look) but ensure same height + ink stroke on hover */
+.wyld-homepage-v17 section span[style*="rgba(255,255,255,0.12)"],
+.wyld-homepage-v17 section span[style*="rgba(255, 255, 255, 0.12)"] {
+  border-color: rgba(255,255,255,0.4) !important;
+}
+
+/* ============================================================
+   v17 HOMEPAGE — 10-POINT UNIFICATION AUDIT (2026-05-28)
+   Surgical polish to bring sections-below-hero up to 2026 premium
+   clean-beauty standard. Scoped strictly to .wyld-homepage-v17 so
+   nothing leaks into other templates. Hero + header LOCKED.
+   ============================================================ */
+
+/* ---- 1. SECTION PADDING RHYTHM — 120px desktop / 72px mobile ---- */
+/* Apply to every section below the hero. Skip the hero section (it is
+   the FIRST section in v17 and has inline height:78vh — we detect it
+   via inline style and exclude). Trust banner kept compact. */
+.wyld-homepage-v17 > section {
+  padding-top: clamp(72px, 10vw, 120px) !important;
+  padding-bottom: clamp(72px, 10vw, 120px) !important;
+}
+/* Hero exception — keep its inline height-based layout */
+.wyld-homepage-v17 > section[style*="78vh"],
+.wyld-homepage-v17 > section[style*="height:78vh"] {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+/* Trust banner exception — single-line marquee, no big vertical padding */
+.wyld-homepage-v17 > section.trust-banner {
+  padding-top: 18px !important;
+  padding-bottom: 18px !important;
+}
+/* Quiz banner — compact strip */
+.wyld-homepage-v17 > section[style*="--wyld-forest"][style*="52px"],
+.wyld-homepage-v17 > section[style*="background:var(--wyld-forest"] {
+  padding-top: clamp(56px, 7vw, 80px) !important;
+  padding-bottom: clamp(56px, 7vw, 80px) !important;
+}
+/* Stat bar — leave as-is (compact strip) */
+.wyld-homepage-v17 > section.stat-bar {
+  padding-top: clamp(40px, 5vw, 56px) !important;
+  padding-bottom: clamp(40px, 5vw, 56px) !important;
+}
+/* Editorial story full-bleed split — keep its grid height */
+.wyld-homepage-v17 > section[style*="grid-template-columns:2fr 3fr"] {
+  padding: 0 !important;
+}
+/* Shop by world full-bleed tile grid — header still gets section padding,
+   but the section uses a custom top-pad in inline style; harmonize */
+@media (max-width: 767px) {
+  .wyld-homepage-v17 > section { padding: 72px 0 !important; }
+  .wyld-homepage-v17 > section[style*="78vh"] { padding: 0 !important; }
+  .wyld-homepage-v17 > section.trust-banner { padding: 14px 0 !important; }
+  .wyld-homepage-v17 > section.stat-bar { padding: 40px 0 !important; }
+  .wyld-homepage-v17 > section[style*="grid-template-columns:2fr 3fr"] { padding: 0 !important; }
+}
+
+/* ---- 2. SECTION EYEBROW CONSISTENCY ---- */
+/* Target every inline-styled eyebrow span (font-size:10px/10.5px + uppercase). */
+.wyld-homepage-v17 [style*="text-transform:uppercase"][style*="letter-spacing:2"],
+.wyld-homepage-v17 [style*="text-transform:uppercase"][style*="letter-spacing: 2"] {
+  font-family: var(--font-subheading-family) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.22em !important;
+  text-transform: uppercase !important;
+  font-weight: 600 !important;
+  color: var(--wyld-stone) !important;
+  margin-bottom: 24px !important;
+}
+/* Exception: keep stat-bar labels and CTA link eyebrows at their own sizes */
+.wyld-homepage-v17 .stat-bar [style*="text-transform:uppercase"],
+.wyld-homepage-v17 a[href][style*="text-transform:uppercase"][style*="border-bottom"],
+.wyld-homepage-v17 [class*="hover-cta"] [style*="text-transform:uppercase"],
+.wyld-homepage-v17 button[onclick^="nwFilter"],
+.wyld-homepage-v17 #moreTabBtn,
+.wyld-homepage-v17 #moreDropdown a {
+  font-size: revert !important;
+  letter-spacing: revert !important;
+  color: var(--wyld-ink) !important;
+  margin-bottom: revert !important;
+  font-weight: revert !important;
+}
+/* Eyebrows that sit on dark backgrounds (editorial story, subscribe, quiz) — keep
+   stone color but lift slightly so they read on dark */
+.wyld-homepage-v17 section[style*="var(--wyld-ink"] [style*="text-transform:uppercase"][style*="letter-spacing:2"],
+.wyld-homepage-v17 section[style*="var(--wyld-forest"] [style*="text-transform:uppercase"][style*="letter-spacing:2"] {
+  color: rgba(168, 168, 147, 0.95) !important; /* sage-on-dark substitute */
+}
+/* Eyebrows inside dark editorial overlays (shop-by-world tiles, build-your-bundle hero,
+   editorial card overlay) — keep cream-on-photo */
+.wyld-homepage-v17 [style*="background:linear-gradient(to top"] [style*="text-transform:uppercase"],
+.wyld-homepage-v17 [style*="rgba(255,255,255,0.6)"][style*="text-transform:uppercase"],
+.wyld-homepage-v17 [style*="rgba(255,255,255,0.65)"][style*="text-transform:uppercase"],
+.wyld-homepage-v17 [style*="rgba(255,255,255,0.7)"][style*="text-transform:uppercase"] {
+  color: rgba(255,255,255,0.7) !important;
+}
+
+/* ---- 3. H2 TYPOGRAPHY UNIFORMITY ---- */
+.wyld-homepage-v17 h2 {
+  font-family: var(--font-heading-family) !important;
+  font-weight: 500 !important;
+  font-size: clamp(2rem, 4.5vw, 3.25rem) !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.01em !important;
+  color: var(--wyld-ink) !important;
+  margin-bottom: 24px !important;
+}
+/* H2 on dark backgrounds — cream, keep weight */
+.wyld-homepage-v17 section[style*="var(--wyld-ink"] h2,
+.wyld-homepage-v17 section[style*="var(--wyld-forest"] h2,
+.wyld-homepage-v17 > section > div[style*="background:var(--wyld-ink"] h2,
+.wyld-homepage-v17 > section[style*="display:grid;grid-template-columns:2fr 3fr"] h2 {
+  color: var(--wyld-cream) !important;
+}
+/* Wyld Standard H2 is inside .wyld-standard — also force */
+.wyld-homepage-v17 .wyld-standard h2 {
+  color: var(--wyld-ink) !important;
+}
+/* H3 inside testimonials/product cards/bundle cards — preserve their smaller sizing */
+.wyld-homepage-v17 h3 {
+  font-family: var(--font-heading-family) !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.005em !important;
+}
+
+/* ---- 4. ROSE ITALIC ACCENT APPLICATION ---- */
+/* Keep rose italic on emotional callouts: sister's skin, gives back, forever.
+   Strip from functional headings (quiz "start?"). */
+.wyld-homepage-v17 h2 em,
+.wyld-homepage-v17 h3 em {
+  font-family: var(--font-heading-family) !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  color: var(--wyld-rose) !important;
+}
+/* Quiz banner h3 "Not sure where to start?" — strip rose accent per Devon's rule
+   (functional CTA section, not emotional). Target the quiz section by background var. */
+.wyld-homepage-v17 > section[style*="var(--wyld-forest"] h3 em {
+  color: rgba(255,255,255,0.92) !important;
+  font-style: normal !important;
+  font-family: var(--font-heading-family) !important;
+}
+
+/* ---- 5. STAR RATINGS CONSISTENCY ---- */
+.wyld-homepage-v17 [style*="var(--wyld-terracotta"][style*="letter-spacing"] {
+  color: var(--wyld-terracotta) !important;
+  font-size: inherit;
+}
+/* Already terracotta — just ensure no override slips through */
+.wyld-homepage-v17 [class*="star"]:not([class*="rating"]),
+.wyld-homepage-v17 .stars svg,
+.wyld-homepage-v17 .rating svg,
+.wyld-homepage-v17 [class*="review-stars"] svg {
+  color: var(--wyld-terracotta) !important;
+  fill: var(--wyld-terracotta) !important;
+}
+
+/* ---- 6. IMAGE ASPECT RATIOS + CORNER RADIUS ---- */
+/* Product card images (height:340px wrappers in product grid + bundles) */
+.wyld-homepage-v17 #products > div > div > div[style*="height:340px"],
+.wyld-homepage-v17 #nwGrid > div > div[style*="height:340px"],
+.wyld-homepage-v17 section[style*="background:var(--cream"] > .container > div[style*="grid-template-columns:1fr repeat(3,1fr)"] > a > div[style*="height:340px"] {
+  border-radius: 4px !important;
+}
+/* Editorial card (height:408px) gets 4:5-ish, soft radius */
+.wyld-homepage-v17 #nwGrid > div[style*="height:408px"],
+.wyld-homepage-v17 a[style*="height:464px"] {
+  border-radius: 4px !important;
+}
+/* Testimonial reviewer avatars — keep circular (already 50%) but normalize size to 48 */
+.wyld-homepage-v17 .wyld-testimonial-card img[width="48"] {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 50% !important;
+}
+/* Editorial story right image — 4:5-ish soft */
+.wyld-homepage-v17 section[style*="grid-template-columns:2fr 3fr"] > div:last-child img {
+  border-radius: 0 !important; /* full-bleed split, no radius */
+}
+/* Wyld Hearts image — 4:5, soft radius */
+.wyld-homepage-v17 section .container > div[style*="grid-template-columns:1fr 1fr"] > div:last-child > div[style*="height:520px"] {
+  border-radius: 4px !important;
+  overflow: hidden;
+}
+/* Shop by World tiles — small radius on each */
+.wyld-homepage-v17 > section[style*="background:var(--cream"] > div[style*="grid-template-columns:repeat(3,1fr)"][style*="gap:3px"] > a {
+  border-radius: 4px !important;
+  overflow: hidden;
+}
+/* Generic image rendering polish inside v17 */
+.wyld-homepage-v17 img {
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* ---- 7. SUB-HEADLINE / BODY COPY CONSISTENCY ---- */
+/* Section-level paragraph copy (the ones inline-styled with --text-light or 13-15px) */
+.wyld-homepage-v17 section > .container > p,
+.wyld-homepage-v17 section > .container > div > p[style*="color:var(--text-light)"],
+.wyld-homepage-v17 section .container p[style*="font-size:15px"] {
+  font-family: var(--font-body-family) !important;
+  font-size: clamp(15px, 1.5vw, 16px) !important;
+  line-height: 1.65 !important;
+  color: var(--wyld-stone) !important;
+  max-width: 540px;
+}
+/* Exception: testimonial blockquotes — keep their italic serif treatment */
+.wyld-homepage-v17 .wyld-testimonial-quote,
+.wyld-homepage-v17 blockquote.wyld-testimonial-quote {
+  font-family: var(--font-heading-family) !important;
+  font-style: italic !important;
+  font-size: 20px !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  color: var(--wyld-ink) !important;
+  letter-spacing: -0.005em !important;
+  max-width: none !important;
+}
+/* Exception: dark-bg body copy stays cream-toned */
+.wyld-homepage-v17 section[style*="var(--wyld-ink"] p[style*="rgba(255,255,255"],
+.wyld-homepage-v17 section[style*="var(--wyld-forest"] p[style*="rgba(255,255,255"],
+.wyld-homepage-v17 > section > div[style*="background:var(--wyld-ink"] p {
+  color: rgba(255,255,255,0.72) !important;
+  max-width: 540px;
+}
+
+/* ---- 8. TERRACOTTA HAIRLINE SECTION DIVIDERS ---- */
+/* Replace the muddy sage 0.3-opacity dividers with a clean cream/border + a
+   single terracotta hairline accent that doesn't shout. */
+.wyld-homepage-v17 > section[style*="border-top:1px solid rgba(195,194,174"] {
+  border-top: 0 !important;
+  position: relative;
+}
+.wyld-homepage-v17 > section + section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 1px;
+  background: var(--wyld-terracotta);
+  opacity: 0.5;
+  z-index: 1;
+}
+/* Don't draw the hairline above dark-bg sections (they have their own visual break) */
+.wyld-homepage-v17 > section[style*="var(--wyld-ink"]::before,
+.wyld-homepage-v17 > section[style*="var(--wyld-forest"]::before,
+.wyld-homepage-v17 > section[style*="grid-template-columns:2fr 3fr"]::before,
+.wyld-homepage-v17 > section.trust-banner::before,
+.wyld-homepage-v17 > section.stat-bar::before {
+  display: none !important;
+}
+
+/* ---- 9. EMAIL OPT-IN SECTION ---- */
+.wyld-homepage-v17 .wyld-optin-input {
+  border: 0 !important;
+  border-bottom: 1px solid var(--wyld-border-strong) !important;
+  background: transparent !important;
+  font-family: var(--font-body-family) !important;
+  font-size: 15px !important;
+  color: var(--wyld-ink) !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 12px 2px !important;
+}
+.wyld-homepage-v17 .wyld-optin-input:focus {
+  outline: none !important;
+  border-bottom-color: var(--wyld-terracotta) !important;
+}
+.wyld-homepage-v17 .wyld-optin-input::placeholder {
+  color: var(--wyld-stone);
+  opacity: 0.7;
+}
+.wyld-homepage-v17 .wyld-optin-btn {
+  background: var(--wyld-ink) !important;
+  color: var(--wyld-cream) !important;
+  border: 1px solid var(--wyld-ink) !important;
+  border-radius: 0 !important;
+  padding: 13px 26px !important;
+  font-family: var(--font-subheading-family) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  cursor: pointer;
+  transition: background 200ms ease;
+}
+.wyld-homepage-v17 .wyld-optin-btn:hover {
+  background: var(--wyld-ink-soft) !important;
+  border-color: var(--wyld-ink-soft) !important;
+}
+
+/* ---- 10. FOOTER TRUST BADGE ROW ---- */
+.wyld-homepage-v17 .wyld-footer-badges > span {
+  font-family: var(--font-subheading-family) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  font-weight: 600 !important;
+}
+/* Label badges — cream-stone tone on dark */
+.wyld-homepage-v17 .wyld-footer-badges > span:not([style*="0.30"]) {
+  color: rgba(255,255,255,0.55) !important;
+}
+/* Separator dots — terracotta */
+.wyld-homepage-v17 .wyld-footer-badges > span[style*="0.30"] {
+  color: var(--wyld-terracotta) !important;
+  opacity: 0.7;
+}
+
+/* ---- BONUS POLISH ---- */
+/* Stat bar numbers — unify font + weight, use ink */
+.wyld-homepage-v17 .stat-bar-number {
+  font-family: var(--font-heading-family) !important;
+  font-weight: 500 !important;
+  color: var(--wyld-ink) !important;
+  letter-spacing: -0.01em !important;
+}
+.wyld-homepage-v17 .stat-bar-label {
+  font-family: var(--font-subheading-family) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  color: var(--wyld-stone) !important;
+  font-weight: 500 !important;
+}
+/* Wyld Standard numbers — terracotta accent */
+.wyld-homepage-v17 .wyld-standard-num {
+  color: var(--wyld-terracotta) !important;
+  font-family: var(--font-heading-family) !important;
+  font-style: italic !important;
+}
+/* Section H2 with em-rose-italic alignment — ensure em doesn't break inheritance */
+.wyld-homepage-v17 h2 > em,
+.wyld-homepage-v17 h3 > em {
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+/* Bundles save-20% badge — terracotta is fine, just radius polish */
+.wyld-homepage-v17 div[style*="background:var(--wyld-terracotta"] {
+  border-radius: 2px !important;
+}
+/* OBSOLETE solid-ink-pill rules removed 2026-05-30.
+   These were forcing solid ink fill on subscribe/story/quiz/wyld-hearts/testimonial CTAs.
+   The new slide-fill outlined → fill animation is now handled by .wyld-subscribe-cta,
+   .wyld-quiz-cta, .wyld-story-cta, .wyld-testi-cta, .wyld-card-cta classes below. */
+/* Hero SHOP NOW exception — confirm white stays (already locked above) */
+
+/* Bundle "Save 20%" left badge — keep terracotta but pill it */
+.wyld-homepage-v17 div[style*="background:var(--wyld-terracotta,#9C5259)"][style*="Save 20%"] {
+  border-radius: 0 !important;
+}
+
+/* Mobile responsive corrections for new padding rhythm */
+@media (max-width: 767px) {
+  .wyld-homepage-v17 h2 {
+    font-size: clamp(1.75rem, 7vw, 2.25rem) !important;
+  }
+  .wyld-homepage-v17 [style*="text-transform:uppercase"][style*="letter-spacing:2"] {
+    font-size: 10.5px !important;
+    margin-bottom: 18px !important;
+  }
+  /* Product grid + bundles → 2-up on mobile */
+  .wyld-homepage-v17 #nwGrid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .wyld-homepage-v17 section[style*="background:var(--cream"] > .container > div[style*="grid-template-columns:1fr repeat(3,1fr)"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  /* Testimonials → 1-col */
+  .wyld-homepage-v17 .wyld-testimonials-grid {
+    grid-template-columns: 1fr !important;
+  }
+  /* Subscribe 2-col grid → 1-col */
+  .wyld-homepage-v17 #subscribe > .container > div[style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  /* Shop by world 3-col → 2-col */
+  .wyld-homepage-v17 > section[style*="background:var(--cream"] > div[style*="grid-template-columns:repeat(3,1fr)"][style*="gap:3px"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  /* Wyld Hearts 2-col → 1-col */
+  .wyld-homepage-v17 section .container > div[style*="grid-template-columns:1fr 1fr"][style*="gap:100px"] {
+    grid-template-columns: 1fr !important;
+    gap: 48px !important;
+  }
+  /* Editorial story 2/3 split → stack */
+  .wyld-homepage-v17 > section[style*="grid-template-columns:2fr 3fr"] {
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+  }
+  /* Email opt-in form → stack */
+  .wyld-homepage-v17 .wyld-optin-form {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .wyld-homepage-v17 .wyld-optin-btn {
+    width: 100%;
+  }
+  /* Footer grid 4-col → 2-col */
+  .wyld-homepage-v17 .wyld-footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 32px !important;
+  }
+  /* Footer badges wrap nicely */
+  .wyld-homepage-v17 .wyld-footer-badges {
+    gap: 14px !important;
+  }
+}
+
+
+/* ============================================================
+   CRITICAL FIX — v17 legacy variable definitions
+   These were defined inside v17 scoped CSS that's been wiped/scoped.
+   Without them, links fall back to default browser blue.
+   ============================================================ */
+:root,
+.wyld-homepage-v17,
+.wyld-homepage {
+  --charcoal: var(--wyld-ink);
+  --charcoal-dark: var(--wyld-ink);
+  --text-light: var(--wyld-stone);
+  --text-dark: var(--wyld-ink);
+  --accent: var(--wyld-terracotta);
+  --cream: var(--wyld-cream);
+  --cream-warm: var(--wyld-cream-warm);
+  --brown: var(--wyld-ink);
+  --brown-dark: var(--wyld-ink);
+  --rose: var(--wyld-rose);
+  --forest: var(--wyld-forest);
+  --sage: var(--wyld-sage);
+}
+
+/* ============================================================
+   Devon: ALL prominent CTAs should be ink pills (no more text links).
+   Plus product card hover buttons must match.
+   ============================================================ */
+
+/* .wyld-standard-link → fully restyled to arrow text-link at bottom of file.
+   Legacy ink-pill block REMOVED 2026-05-29 per Devon's Kosas pattern brief. */
+
+/* "Shop All →" tertiary section-end links — keep as hairline underline text-links.
+   (Kosas editorial pattern.) */
+.wyld-homepage-v17 a[style*="border-bottom:1px solid"][style*="text-transform:uppercase"][style*="letter-spacing"] {
+  background: transparent !important;
+  color: var(--wyld-ink) !important;
+  padding: 0 !important;
+  padding-bottom: 4px !important;
+  border-radius: 0 !important;
+  border-bottom: 1px solid var(--wyld-ink) !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  font-family: var(--font-subheading-family) !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+}
+
+/* "Subscribe" and "Find My Routine" anchor links (section TOC style) — keep as text but ensure ink */
+.wyld-homepage-v17 a[href*="#subscribe"]:not([class*="cta"]):not([style*="background"]),
+.wyld-homepage-v17 a[href*="#routine-quiz"]:not([class*="cta"]):not([style*="background"]) {
+  color: var(--wyld-ink) !important;
+  font-weight: 600;
+}
+
+/* Product card hover-reveal "Shop Now" buttons — Kosas hairline outline pill */
+.wyld-homepage-v17 .testimonial-product-reveal a,
+.wyld-homepage-v17 [class*="product-card"] a[style*="background"],
+.wyld-homepage-v17 .nwCard a[style*="background"],
+.wyld-homepage-v17 [class*="hover"] a[style*="background"] {
+  background: transparent !important;
+  color: var(--wyld-ink) !important;
+  border: 1px solid var(--wyld-ink) !important;
+  border-radius: 0 !important;
+  transition: background 220ms ease, color 220ms ease !important;
+}
+.wyld-homepage-v17 .testimonial-product-reveal a:hover,
+.wyld-homepage-v17 [class*="product-card"] a[style*="background"]:hover,
+.wyld-homepage-v17 .nwCard a[style*="background"]:hover,
+.wyld-homepage-v17 [class*="hover"] a[style*="background"]:hover {
+  background: var(--wyld-ink) !important;
+  color: var(--wyld-cream) !important;
+}
+
+/* Quick Add buttons (mega menu + homepage) — Kosas hairline outline */
+.wyld-product-card__add,
+.wyld-product-card__add-btn,
+.wyld-h__mega-card-add,
+.wyld-homepage-v17 button[type="submit"][class*="add"] {
+  background: transparent !important;
+  color: var(--wyld-ink) !important;
+  border: 1px solid var(--wyld-ink) !important;
+  border-radius: 0 !important;
+  transition: background 220ms ease, color 220ms ease !important;
+}
+.wyld-product-card__add:hover,
+.wyld-product-card__add-btn:hover,
+.wyld-h__mega-card-add:hover:not(:disabled),
+.wyld-homepage-v17 button[type="submit"][class*="add"]:hover {
+  background: var(--wyld-ink) !important;
+  color: var(--wyld-cream) !important;
+}
+
+/* ============================================================
+   FIX — revert "Shop All →" tertiary section-end links back to
+   premium text links. Only PRIMARY CTAs should be pills.
+   Aesop / Salt & Stone / Crown Affair pattern.
+   ============================================================ */
+/* Revert the broad border-bottom uppercase link rule that pill-ified too much */
+.wyld-homepage-v17 a[style*="border-bottom:1px solid"][style*="text-transform:uppercase"][style*="letter-spacing"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--wyld-ink) !important;
+  padding: 4px 0 6px !important;
+  border-radius: 0 !important;
+  border-bottom: 1px solid var(--wyld-ink) !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  font-family: var(--font-subheading-family) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+}
+.wyld-homepage-v17 a[style*="border-bottom:1px solid"][style*="text-transform:uppercase"][style*="letter-spacing"]:hover {
+  color: var(--wyld-terracotta) !important;
+  border-bottom-color: var(--wyld-terracotta) !important;
+}
+
+/* Keep PRIMARY pill buttons — .wyld-standard-link is used for primary CTAs.
+   Re-affirm those stay as pills (already correctly styled above). */
+
+/* ============================================================
+   KOSAS-STYLE BUTTON SYSTEM (2026-05-29 Devon-approved rewrite)
+   All primary CTAs → hairline outline pill (transparent fill, ink border)
+   Editorial column links → arrow text-link (no pill, hairline underline)
+   Hero photo SHOP NOW → WHITE solid pill (locked, separate block below)
+   ============================================================ */
+
+/* TIER 1 — PRIMARY (hairline outline pill) — Kosas universal button pattern.
+   Covers all inline-style "background:" CTAs across the homepage. */
+.wyld-homepage-v17 a[href][style*="background:var(--wyld-forest"],
+.wyld-homepage-v17 a[href][style*="background:var(--wyld-ink"],
+.wyld-homepage-v17 a[href*="subscribe"][style*="background"],
+.wyld-homepage-v17 a[href*="/products/"][style*="background"],
+.wyld-homepage-v17 a[href*="/collections/"][style*="background"],
+.wyld-homepage-v17 a[href="/pages/about"][style*="background"],
+.wyld-homepage-v17 a[href*="wyld-hearts"][style*="background"],
+.wyld-homepage-v17 a[href*="/blogs/"][style*="background"],
+.wyld-homepage-v17 a[href*="/pages/sustainability"][style*="background"],
+.wyld-homepage-v17 a[href*="/pages/how-to"][style*="background"],
+.wyld-homepage-v17 .testimonial-product-reveal a {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--wyld-ink) !important;
+  padding: 13px 28px !important; /* -1px to account for hairline border */
+  border-radius: 0 !important;
+  border: 1px solid var(--wyld-ink) !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px;
+  font-family: var(--font-subheading-family) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  line-height: 1 !important;
+  transition: background 220ms ease, color 220ms ease, transform 220ms ease !important;
+}
+.wyld-homepage-v17 a[href][style*="background:var(--wyld-forest"]:hover,
+.wyld-homepage-v17 a[href][style*="background:var(--wyld-ink"]:hover,
+.wyld-homepage-v17 a[href*="subscribe"][style*="background"]:hover,
+.wyld-homepage-v17 a[href*="/products/"][style*="background"]:hover,
+.wyld-homepage-v17 a[href*="/collections/"][style*="background"]:hover,
+.wyld-homepage-v17 a[href="/pages/about"][style*="background"]:hover,
+.wyld-homepage-v17 a[href*="wyld-hearts"][style*="background"]:hover,
+.wyld-homepage-v17 a[href*="/blogs/"][style*="background"]:hover,
+.wyld-homepage-v17 a[href*="/pages/sustainability"][style*="background"]:hover,
+.wyld-homepage-v17 a[href*="/pages/how-to"][style*="background"]:hover,
+.wyld-homepage-v17 .testimonial-product-reveal a:hover {
+  background: var(--wyld-ink) !important;
+  color: var(--wyld-cream) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* TIER 2 — EDITORIAL ARROW TEXT LINKS — for The Wyld Standard columns.
+   No pill, no border. Tiny Jost uppercase with → arrow + hairline underline.
+   Matches Kosas editorial / Aesop-style minimalism. */
+.wyld-homepage-v17 .wyld-standard-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin-top: 18px !important;
+  color: var(--wyld-ink) !important;
+  font-family: var(--font-subheading-family) !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid var(--wyld-ink) !important;
+  padding-bottom: 4px !important;
+  border-radius: 0 !important;
+  transition: color 200ms ease, border-color 200ms ease, gap 200ms ease !important;
+}
+.wyld-homepage-v17 .wyld-standard-link::after {
+  content: "→";
+  font-size: 12px;
+  letter-spacing: 0;
+  transition: transform 200ms ease;
+}
+.wyld-homepage-v17 .wyld-standard-link:hover {
+  color: var(--wyld-terracotta) !important;
+  border-bottom-color: var(--wyld-terracotta) !important;
+  gap: 12px !important;
+  background: transparent !important;
+}
+.wyld-homepage-v17 .wyld-standard-link:hover::after {
+  transform: translateX(2px);
+}
+
+/* Mega hero CTAs match new hairline-outline primary spec */
+.wyld-h__mega-cta--primary {
+  background: transparent !important;
+  color: var(--wyld-ink) !important;
+  border: 1px solid var(--wyld-ink) !important;
+  padding: 13px 28px !important;
+  font-size: 11px !important;
+  letter-spacing: 0.16em !important;
+  border-radius: 0 !important;
+}
+.wyld-h__mega-cta--primary:hover {
+  background: var(--wyld-ink) !important;
+  color: var(--wyld-cream) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Header SHOP NOW + QUIZ CTAs match new hairline-outline spec */
+.wyld-h__cta,
+.wyld-h__quiz-cta {
+  background: transparent !important;
+  color: var(--wyld-ink) !important;
+  border: 1px solid var(--wyld-ink) !important;
+  padding: 13px 28px !important;
+  font-size: 11px !important;
+  letter-spacing: 0.16em !important;
+  border-radius: 0 !important;
+  transition: background 220ms ease, color 220ms ease !important;
+}
+.wyld-h__cta:hover,
+.wyld-h__quiz-cta:hover {
+  background: var(--wyld-ink) !important;
+  color: var(--wyld-cream) !important;
+}
+
+/* ============================================================
+   HARD LOCK — hero photo SHOP NOW button stays WHITE
+   Explicit override that wins over all primary-pill rules
+   ============================================================ */
+.wyld-homepage-v17 a[href="#products"]:not([class]),
+.wyld-homepage-v17 a[href="#products"]:not([class]):hover {
+  background: #FFFFFF !important;
+  background-color: #FFFFFF !important;
+  color: var(--wyld-ink) !important;
+  border: none !important;
+  border-color: #FFFFFF !important;
+  padding: 14px 28px !important;
+  border-radius: 0 !important;
+  font-family: var(--font-subheading-family) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+}
+.wyld-homepage-v17 a[href="#products"]:not([class]):hover {
+  opacity: 0.92 !important;
+  transform: translateY(-1px) !important;
+}
+
+
+/* ============================================================
+   2026-05-29 — SMOKY FOREST-CHARCOAL EVOLUTION
+   Devon's directive (Aesop-inspired): announcement bar → smoky-forest.
+   Product page commerce CTAs (Add to Cart, Subscribe) → solid smoke.
+   Editorial/hero CTAs stay outline ink. Rose accent stays italic-word only.
+   ============================================================ */
+
+/* PRODUCT PAGE — Add to Cart, Subscribe, Quick Add → Kosas HAIRLINE OUTLINE INK rectangle
+   2026-05-29 swap: Devon picked Kosas pattern. Transparent fill, 1px ink border,
+   ink text. Hover fills ink, text flips cream. Sharp corners. */
+.product-form__buttons button[type="submit"],
+.product-form__submit,
+form[action*="/cart/add"] button[type="submit"],
+.shopify-product-form button[type="submit"],
+.subscription-button,
+button[name="subscribe"],
+a[href*="subscribe-and-save"][class*="button"],
+a[href*="/products/"][class*="buy-now"],
+.wyld-product-card__add,
+.wyld-product-card__add-btn,
+.wyld-h__mega-card-add {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #333333 !important;
+  border: 1px solid #333333 !important;
+  border-radius: 0 !important;
+  transition: background 220ms ease, color 220ms ease, transform 220ms ease !important;
+}
+.product-form__buttons button[type="submit"]:hover,
+.product-form__submit:hover,
+form[action*="/cart/add"] button[type="submit"]:hover,
+.shopify-product-form button[type="submit"]:hover,
+.subscription-button:hover,
+button[name="subscribe"]:hover,
+a[href*="subscribe-and-save"][class*="button"]:hover,
+.wyld-product-card__add:hover,
+.wyld-product-card__add-btn:hover,
+.wyld-h__mega-card-add:hover:not(:disabled) {
+  background: #333333 !important;
+  color: var(--wyld-cream) !important;
+  border-color: #333333 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Horizon token: outline #333 (Aesop charcoal) primary button */
+:root {
+  --color-primary: #333333;
+  --color-primary-hover: #333333;
+  --color-primary-button-background: transparent;
+  --color-primary-button-border: #333333;
+  --color-primary-button-text: #333333;
+  --color-primary-button-hover-background: #333333;
+}
+
+/* Announcement bar = dusty rose (reverted 2026-05-29 — rose top, smoke buttons per Devon) */
+.wyld-h__announce {
+  background: var(--wyld-rose) !important;
+  color: var(--wyld-cream) !important;
+}
+
+
+/* === ACTIVE category tab indicator → DUSTY ROSE (Devon 2026-05-29) ===
+   The "Find your Wyld" bestseller tabs use inline `var(--charcoal)` for the
+   active state's underline + text. Re-mapping --charcoal locally to rose
+   on these specific buttons turns the active state rose without touching
+   any other element. Inactive tabs use var(--text-light) and transparent
+   border, so they're unaffected. */
+.wyld-homepage-v17 button[onclick^="nwFilter"] {
+  --charcoal: var(--wyld-rose);
+}
+.wyld-homepage-v17 button[onclick^="nwFilter"]:hover {
+  --text-light: var(--wyld-rose);
+}
+
+/* === Product card buttons — ALWAYS visible below, Kosas/Saie pattern (Devon 2026-05-29) ===
+   1. Hide the dark hover-overlay reveal CTA on the image
+   2. Add a hairline outline "SHOP NOW" rectangle BELOW each product card
+   The outer div has onclick → so the pseudo-button is part of the same click region. */
+
+/* Hide the existing hover-reveal overlay */
+.wyld-homepage-v17 [data-cat] .hover-cta {
+  display: none !important;
+}
+
+/* Align all SHOP NOW buttons at the same vertical position per row.
+   Target only cards NOT hidden by tab filter (inline display:none stays winning).
+   Use flex column + margin-top:auto on ::after to push button to bottom. */
+.wyld-homepage-v17 [data-cat]:not([style*="display:none"]):not([style*="display: none"]) {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Add a Kosas-style outline button at the BOTTOM of each card via ::after */
+.wyld-homepage-v17 [data-cat]::after {
+  content: "SHOP NOW";
+  display: block;
+  margin-top: auto;
+  padding: 13px 24px;
+  background: transparent;
+  color: #333333;
+  border: 1px solid #333333;
+  border-radius: 0;
+  font-family: var(--font-subheading-family);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1;
+  transition: background 220ms ease, color 220ms ease;
+}
+.wyld-homepage-v17 [data-cat]:hover::after {
+  background: #333333;
+  color: var(--wyld-cream);
+}
+
+/* Exclude the editorial "Explore the Full Collection" card (it has overlay text, not a product) */
+.wyld-homepage-v17 [data-cat="favorites"][onclick*="all-products"]::after,
+.wyld-homepage-v17 [data-cat="favorites"]:has(p):has(h3):has(span[style*="border-bottom"])::after {
+  content: none;
+  display: none;
+}
+
+/* === Editorial "Explore the Full Collection" lifestyle card ===
+   Stretch its height to match product card row height (was inline 408px,
+   now matches the grid row stretching). Suppress the SHOP NOW ::after
+   since this card already has its own "SHOP ALL" CTA baked in. */
+.wyld-homepage-v17 [data-cat="favorites"][onclick*="all-products"] {
+  height: 100% !important;
+  min-height: 100% !important;
+}
+.wyld-homepage-v17 [data-cat="favorites"][onclick*="all-products"]::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* === BUNDLES SECTION — match Kosas/Saie pattern (Devon 2026-05-29) ===
+   Same treatment as "Find your Wyld" bestsellers:
+   - Hide hover-overlay reveal
+   - Add always-visible SHOP BUNDLE outline button at bottom of each card
+   - Stretch editorial "Build Your Own Bundle" lifestyle card to match height */
+
+/* Bundle product cards (Oils / Toothpaste / Tattoo) — flex column + button ::after */
+.wyld-homepage-v17 a[href*="/collections/bundles"]:has(.hover-cta) {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.wyld-homepage-v17 a[href*="/collections/bundles"] .hover-cta {
+  display: none !important;
+}
+.wyld-homepage-v17 a[href*="/collections/bundles"]:has(.hover-cta)::after {
+  content: "SHOP BUNDLE";
+  display: block;
+  margin-top: auto;
+  padding: 13px 24px;
+  background: transparent;
+  color: #333333;
+  border: 1px solid #333333;
+  border-radius: 0;
+  font-family: var(--font-subheading-family);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1;
+  transition: background 220ms ease, color 220ms ease;
+}
+.wyld-homepage-v17 a[href*="/collections/bundles"]:has(.hover-cta):hover::after {
+  background: #333333;
+  color: var(--wyld-cream);
+}
+
+/* Editorial "Build Your Own Bundle" lifestyle card — stretch to match row height,
+   override inline height:464px. NO ::after button (it has its own START BUILDING CTA). */
+.wyld-homepage-v17 a[href*="/collections/bundles"][style*="height:464px"] {
+  height: 100% !important;
+  min-height: 100% !important;
+}
+
+/* === "SAVE 20%" sales chip on bundle cards → dusty rose (Devon 2026-05-29) ===
+   Was terracotta (var(--wyld-terracotta) #9C5259). Now matches the
+   editorial rose palette. Also bump font + padding for legibility. */
+.wyld-homepage-v17 a[href*="/collections/bundles"] div[style*="background:var(--wyld-terracotta"] {
+  background: var(--wyld-rose) !important;
+  color: var(--wyld-cream) !important;
+  font-size: 11px !important;
+  letter-spacing: 1.5px !important;
+  padding: 7px 14px !important;
+}
+
+/* === Align SHOP NOW / SHOP BUNDLE buttons at the bottom of every card ===
+   margin-top: auto pushes the ::after to the bottom of its flex parent.
+   Cards have equal heights (grid stretch), so all buttons land at the same Y. */
+.wyld-homepage-v17 [data-cat]::after,
+.wyld-homepage-v17 a[href*="/collections/bundles"]:has(.hover-cta)::after {
+  margin-top: auto !important;
+}
+
+/* === MORE+ dropdown menu — force items to stack vertically === */
+.wyld-homepage-v17 #moreDropdown a {
+  display: block !important;
+  width: 100% !important;
+  padding: 14px 20px !important;
+  box-sizing: border-box;
+}
+
+/* === Editorial Story section — slightly darker cream + force text contrast ===
+   Some text was rendering near-invisible on pure cream. Bump bg to cream-warm
+   (#F4EFE6) for more contrast, force h2 to ink. */
+.wyld-homepage-v17 section[style*="grid-template-columns:2fr 3fr"] > div:first-child {
+  background: var(--wyld-cream-warm, #F4EFE6) !important;
+}
+.wyld-homepage-v17 section[style*="grid-template-columns:2fr 3fr"] h2 {
+  color: var(--wyld-ink, #1F1B17) !important;
+}
+.wyld-homepage-v17 section[style*="grid-template-columns:2fr 3fr"] h2 em {
+  color: var(--wyld-rose, #9A6B65) !important;
+}
+
+/* === Commerce buttons → SOLID DUSTY ROSE (Devon 2026-05-29) ===
+   Switch from outline #333 to solid rose for the brand-pop natural feel.
+   Hover = darker rose. Editorial CTAs (text-link arrows) stay untouched.
+   Hero photo SHOP NOW stays white (locked). */
+
+/* Product card ::after SHOP NOW buttons → solid rose */
+.wyld-homepage-v17 [data-cat]::after {
+  background: var(--wyld-rose) !important;
+  color: var(--wyld-cream) !important;
+  border: 1px solid var(--wyld-rose) !important;
+}
+.wyld-homepage-v17 [data-cat]:hover::after {
+  background: var(--wyld-rose-dark) !important;
+  border-color: var(--wyld-rose-dark) !important;
+  color: var(--wyld-cream) !important;
+}
+
+/* Bundle card ::after SHOP BUNDLE buttons → solid rose */
+.wyld-homepage-v17 a[href*="/collections/bundles"]:has(.hover-cta)::after {
+  background: var(--wyld-rose) !important;
+  color: var(--wyld-cream) !important;
+  border: 1px solid var(--wyld-rose) !important;
+}
+.wyld-homepage-v17 a[href*="/collections/bundles"]:has(.hover-cta):hover::after {
+  background: var(--wyld-rose-dark) !important;
+  border-color: var(--wyld-rose-dark) !important;
+  color: var(--wyld-cream) !important;
+}
+
+/* Product page Add to Cart / Subscribe → solid rose */
+.product-form__buttons button[type="submit"],
+.product-form__submit,
+form[action*="/cart/add"] button[type="submit"],
+.shopify-product-form button[type="submit"],
+.subscription-button,
+button[name="subscribe"],
+a[href*="subscribe-and-save"][class*="button"],
+a[href*="/products/"][class*="buy-now"],
+.wyld-product-card__add,
+.wyld-product-card__add-btn,
+.wyld-h__mega-card-add {
+  background: var(--wyld-rose) !important;
+  background-color: var(--wyld-rose) !important;
+  color: var(--wyld-cream) !important;
+  border: 1px solid var(--wyld-rose) !important;
+}
+.product-form__buttons button[type="submit"]:hover,
+.product-form__submit:hover,
+form[action*="/cart/add"] button[type="submit"]:hover,
+.shopify-product-form button[type="submit"]:hover,
+.subscription-button:hover,
+button[name="subscribe"]:hover,
+a[href*="subscribe-and-save"][class*="button"]:hover,
+.wyld-product-card__add:hover,
+.wyld-product-card__add-btn:hover,
+.wyld-h__mega-card-add:hover:not(:disabled) {
+  background: var(--wyld-rose-dark) !important;
+  border-color: var(--wyld-rose-dark) !important;
+  color: var(--wyld-cream) !important;
+}
+
+/* ============================================================
+   2026-05-29 — WARMER BACKGROUND + REVERT BUTTONS TO OUTLINE INK
+   Devon: bump cream warmer (Elate direction), buttons back to outline.
+   ============================================================ */
+
+/* Shift base palette warmer */
+:root {
+  --wyld-cream: #F4EFE6;          /* was #FDFCF8 — bumped to old cream-warm */
+  --wyld-cream-warm: #EAE0CE;     /* was #F4EFE6 — bumped to deeper warm sand */
+}
+
+/* Belt-and-suspenders for any place that hard-coded the old cream */
+body,
+.wyld-homepage-v17 {
+  background: var(--wyld-cream) !important;
+}
+
+/* === Commerce buttons → REVERT to outline ink rectangle (Kosas/Saie pattern) === */
+.wyld-homepage-v17 [data-cat]::after,
+.wyld-homepage-v17 a[href*="/collections/bundles"]:has(.hover-cta)::after {
+  background: transparent !important;
+  color: var(--wyld-ink) !important;
+  border: 1px solid var(--wyld-ink) !important;
+}
+.wyld-homepage-v17 [data-cat]:hover::after,
+.wyld-homepage-v17 a[href*="/collections/bundles"]:has(.hover-cta):hover::after {
+  background: var(--wyld-ink) !important;
+  border-color: var(--wyld-ink) !important;
+  color: var(--wyld-cream) !important;
+}
+
+/* Product page commerce CTAs → outline ink */
+.product-form__buttons button[type="submit"],
+.product-form__submit,
+form[action*="/cart/add"] button[type="submit"],
+.shopify-product-form button[type="submit"],
+.subscription-button,
+button[name="subscribe"],
+a[href*="subscribe-and-save"][class*="button"],
+a[href*="/products/"][class*="buy-now"],
+.wyld-product-card__add,
+.wyld-product-card__add-btn,
+.wyld-h__mega-card-add {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--wyld-ink) !important;
+  border: 1px solid var(--wyld-ink) !important;
+}
+.product-form__buttons button[type="submit"]:hover,
+.product-form__submit:hover,
+form[action*="/cart/add"] button[type="submit"]:hover,
+.shopify-product-form button[type="submit"]:hover,
+.subscription-button:hover,
+button[name="subscribe"]:hover,
+a[href*="subscribe-and-save"][class*="button"]:hover,
+.wyld-product-card__add:hover,
+.wyld-product-card__add-btn:hover,
+.wyld-h__mega-card-add:hover:not(:disabled) {
+  background: var(--wyld-ink) !important;
+  border-color: var(--wyld-ink) !important;
+  color: var(--wyld-cream) !important;
+}
+
+/* === Header + announcement → lighter cream (Devon 2026-05-29) ===
+   Body stays warm cream #F4EFE6 but the header area + above-fold reads
+   better with the lighter near-white #FDFCF8 against the dark hero photo. */
+wyld-header,
+.wyld-h,
+.wyld-h__bar,
+.wyld-h__main {
+  background: #FDFCF8 !important;
+}
+
+/* === Fix: edges + rotating trust banner all need light cream (Devon 2026-05-29) ===
+   Set body to light cream (covers screen edges + header area).
+   Push warm cream onto the homepage content wrapper only.
+   Revert rotating announcement bar from rose → light cream + ink text. */
+html, body {
+  background: #FDFCF8 !important;
+}
+.wyld-homepage-v17,
+main {
+  background: var(--wyld-cream-warm, #F4EFE6);
+}
+
+/* Rotating trust/announcement banner → light cream + ink text */
+.wyld-h__announce {
+  background: #FDFCF8 !important;
+  color: var(--wyld-ink, #1F1B17) !important;
+  border-bottom: 1px solid var(--wyld-border, rgba(31,27,23,0.10)) !important;
+}
+.wyld-h__announce-slide {
+  color: var(--wyld-ink, #1F1B17) !important;
+}
+
+/* === Fix: page-wide wrapper was making the EDGES warm too. ===
+   The .wyld-homepage-v17 wrapper extends to the viewport edges, so
+   giving it warm-cream bg made the screen edges warm = mismatched the
+   light header. Now make the wrapper transparent — body's light cream
+   shows through on the edges. Sections that should be warm have their
+   own inline bg using --wyld-cream which is already warm #F4EFE6. */
+.wyld-homepage-v17 {
+  background: transparent !important;
+}
+main {
+  background: transparent;
+}
+
+
+/* === Force light cream on Shopify theme wrappers between body and content === */
+.page,
+.page-wrapper,
+.page-width,
+.shopify-section--header,
+.content-for-layout,
+[class*="sections-wrapper"],
+[class*="page-wrapper"] {
+  background: transparent !important;
+}
+
+/* === Header bar inner had warm cream bg making edges look warm ===
+   Playwright inspection confirmed: .wyld-h__bar-inner had bg #F4EFE6.
+   Make it transparent so the parent .wyld-h__bar (light cream) shows through. */
+.wyld-h__bar-inner,
+.wyld-h__main-inner {
+  background: transparent !important;
+}
+
+/* === REVERT: back to original light cream site-wide (Devon 2026-05-29) ===
+   Undo the warm cream shift. Everything goes back to #FDFCF8 main +
+   the gentler #F4EFE6 only on intentional alternating section panels.
+   Announcement bar stays light cream (no more rose). */
+:root {
+  --wyld-cream: #FDFCF8 !important;
+  --wyld-cream-warm: #F4EFE6 !important;
+}
+html, body,
+.wyld-homepage-v17,
+main,
+.wyld-h__bar,
+.wyld-h__bar-inner,
+.wyld-h__main,
+.wyld-h__main-inner,
+.wyld-h__announce,
+wyld-header,
+.wyld-h {
+  background: #FDFCF8 !important;
+  background-color: #FDFCF8 !important;
+}
+.wyld-h__announce,
+.wyld-h__announce-slide {
+  color: var(--wyld-ink, #1F1B17) !important;
+}
+
+/* === FINAL: keep WARM body, ONLY header bar + announce go light ===
+   Devon clarified — body stays warm cream, just the top header strip
+   + rotating trust banner are the lighter old cream. */
+:root {
+  --wyld-cream: #F4EFE6 !important;      /* warm body */
+  --wyld-cream-warm: #EAE0CE !important; /* deeper warm for sections */
+}
+html, body {
+  background: #F4EFE6 !important;
+}
+.wyld-homepage-v17 {
+  background: transparent !important;
+}
+/* Header bar + announce ONLY stay light cream */
+wyld-header,
+.wyld-h,
+.wyld-h__bar,
+.wyld-h__bar-inner,
+.wyld-h__main,
+.wyld-h__main-inner,
+.wyld-h__announce {
+  background: #FDFCF8 !important;
+  background-color: #FDFCF8 !important;
+}
+.wyld-h__announce,
+.wyld-h__announce-slide {
+  color: var(--wyld-ink, #1F1B17) !important;
+}
+
+/* === Trust banner (scrolling marquee) also goes light cream like the header === */
+.wyld-homepage-v17 .trust-banner,
+.wyld-homepage-v17 section.trust-banner,
+.wyld-homepage-v17 .trust-banner .scrolling-content {
+  background: #FDFCF8 !important;
+  background-color: #FDFCF8 !important;
+}
+
+/* === Top announcement banner → DARKER cream (matches body warm) ===
+   Devon: top banner above header should be the darker cream, not light. */
+.wyld-h__announce {
+  background: #F4EFE6 !important;
+  background-color: #F4EFE6 !important;
+}
+
+/* ============================================================
+   2026-05-29 — FINAL PALETTE: cream + dusty rose + sage + ink
+   Locked per Devon. Replaces forest + terracotta with sage.
+   Elate-style discipline: 0 border-radius, Jost 0.14em letter-spacing.
+   ============================================================ */
+
+/* Re-map palette variables — sage replaces forest/terracotta in all uses */
+:root {
+  --wyld-cream: #F4EFE3 !important;            /* main bg — warm cream */
+  --wyld-cream-warm: #FAF6EC !important;       /* secondary section bg */
+  --wyld-ink: #2E332C !important;              /* warm near-black text */
+  --wyld-ink-soft: #3A3F36 !important;
+  --wyld-stone: #6B6F5E !important;            /* muted text — sage-tinted */
+  --wyld-rose: #9A6B65 !important;             /* accent #1 — dusty rose */
+  --wyld-rose-dark: #7D5550 !important;
+  --wyld-sage: #7E876D !important;             /* accent #2 — muted sage (primary button) */
+  --wyld-sage-dark: #6A7259 !important;
+  /* Forest + terracotta REMAPPED to sage so existing CSS uses sage */
+  --wyld-forest: #7E876D !important;
+  --wyld-forest-dark: #6A7259 !important;
+  --wyld-forest-light: #8E9779 !important;
+  --wyld-terracotta: #7E876D !important;
+  --wyld-terracotta-dark: #6A7259 !important;
+}
+
+/* Body bg = warm cream */
+html, body {
+  background: #F4EFE3 !important;
+}
+
+/* Editorial sage on solid CTAs site-wide — replaces forest + terracotta */
+.product-form__buttons button[type="submit"],
+.product-form__submit,
+form[action*="/cart/add"] button[type="submit"],
+.shopify-product-form button[type="submit"],
+.subscription-button,
+button[name="subscribe"],
+.button--primary,
+.button[data-style="primary"],
+.wyld-h__cta,
+.wyld-h__quiz-cta,
+.wyld-product-card__add,
+.wyld-h__mega-card-add,
+.wyld-homepage-v17 a[href][style*="background:var(--wyld-forest"],
+.wyld-homepage-v17 a[href][style*="background:var(--wyld-ink"],
+.wyld-homepage-v17 a[href*="wyld-hearts"][style*="background"],
+.wyld-homepage-v17 a[href="/pages/about"][style*="background"],
+.wyld-homepage-v17 a[href*="subscribe"][style*="background"] {
+  background: #7E876D !important;
+  background-color: #7E876D !important;
+  color: #F4EFE3 !important;
+  border: 1px solid #7E876D !important;
+  border-radius: 0 !important;
+  font-family: var(--font-subheading-family) !important;
+  font-size: 12px !important;
+  letter-spacing: 0.14em !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+}
+.product-form__buttons button[type="submit"]:hover,
+.product-form__submit:hover,
+.subscription-button:hover,
+.button--primary:hover,
+.wyld-h__cta:hover,
+.wyld-h__quiz-cta:hover,
+.wyld-product-card__add:hover,
+.wyld-h__mega-card-add:hover:not(:disabled),
+.wyld-homepage-v17 a[href][style*="background:var(--wyld-forest"]:hover,
+.wyld-homepage-v17 a[href*="wyld-hearts"][style*="background"]:hover {
+  background: #6A7259 !important;
+  border-color: #6A7259 !important;
+  color: #F4EFE3 !important;
+}
+
+/* Product card SHOP NOW ::after → SAGE solid */
+.wyld-homepage-v17 [data-cat]::after,
+.wyld-homepage-v17 a[href*="/collections/bundles"]:has(.hover-cta)::after {
+  background: #7E876D !important;
+  color: #F4EFE3 !important;
+  border: 1px solid #7E876D !important;
+}
+.wyld-homepage-v17 [data-cat]:hover::after,
+.wyld-homepage-v17 a[href*="/collections/bundles"]:has(.hover-cta):hover::after {
+  background: #6A7259 !important;
+  border-color: #6A7259 !important;
+}
+
+/* Hero photo SHOP NOW stays WHITE (locked) */
+.wyld-homepage-v17 a[href="#products"]:not([class]) {
+  background: #FFFFFF !important;
+  color: #2E332C !important;
+}
+
+/* Save 20% chip → ROSE (kept) — overrides any sage remapping */
+.wyld-homepage-v17 a[href*="/collections/bundles"] div[style*="background:var(--wyld-terracotta"] {
+  background: #9A6B65 !important;
+}
+
+/* Headline italic accents (e.g. "my sister's skin") stay ROSE */
+.wyld-homepage-v17 h2 em,
+.wyld-homepage-v17 h3 em {
+  color: #9A6B65 !important;
+}
+
+/* === Unify all top zones to warm cream (Devon 2026-05-29) ===
+   Single warm cream canvas across entire site. Sage + rose do the color work. */
+.wyld-h__announce,
+.wyld-h__announce-slide,
+wyld-header,
+.wyld-h,
+.wyld-h__bar,
+.wyld-h__bar-inner,
+.wyld-h__main,
+.wyld-h__main-inner,
+.wyld-homepage-v17 .trust-banner,
+.wyld-homepage-v17 section.trust-banner,
+.wyld-homepage-v17 .trust-banner .scrolling-content {
+  background: #F4EFE3 !important;
+  background-color: #F4EFE3 !important;
+}
+.wyld-h__announce,
+.wyld-h__announce-slide {
+  color: #2E332C !important;
+}
+
+/* === Brighten cream + refine palette (Devon 2026-05-29) ===
+   "Too dark" feeling — lighten the main cream to give the page more air.
+   Sage + rose will pop more deliberately against the brighter bg. */
+:root {
+  --wyld-cream: #FAF6EE !important;      /* medium-light warm cream, more luminous */
+  --wyld-cream-warm: #F0EAD8 !important; /* alternating section bg */
+}
+html, body,
+.wyld-h__announce,
+.wyld-h__announce-slide,
+wyld-header, .wyld-h,
+.wyld-h__bar, .wyld-h__bar-inner,
+.wyld-h__main, .wyld-h__main-inner,
+.wyld-homepage-v17 .trust-banner,
+.wyld-homepage-v17 section.trust-banner,
+.wyld-homepage-v17 .trust-banner .scrolling-content {
+  background: #FAF6EE !important;
+  background-color: #FAF6EE !important;
+}
+
+/* === 2026-05-29 — DROP SAGE → INK (Devon: sage reads vomit on lighter cream) ===
+   Final palette: cream + ink + rose. Solid ink buttons (Kosas/Saie/Westman pattern). */
+:root {
+  --wyld-sage: #2E332C !important;
+  --wyld-sage-dark: #1F2421 !important;
+  --wyld-forest: #2E332C !important;
+  --wyld-forest-dark: #1F2421 !important;
+  --wyld-terracotta: #2E332C !important;
+  --wyld-terracotta-dark: #1F2421 !important;
+}
+
+/* All commerce CTAs → solid ink */
+.product-form__buttons button[type="submit"],
+.product-form__submit,
+form[action*="/cart/add"] button[type="submit"],
+.shopify-product-form button[type="submit"],
+.subscription-button,
+button[name="subscribe"],
+.button--primary,
+.button[data-style="primary"],
+.wyld-h__cta,
+.wyld-h__quiz-cta,
+.wyld-product-card__add,
+.wyld-h__mega-card-add,
+.wyld-homepage-v17 a[href][style*="background:var(--wyld-forest"],
+.wyld-homepage-v17 a[href][style*="background:var(--wyld-ink"],
+.wyld-homepage-v17 a[href*="wyld-hearts"][style*="background"],
+.wyld-homepage-v17 a[href="/pages/about"][style*="background"],
+.wyld-homepage-v17 a[href*="subscribe"][style*="background"],
+.wyld-homepage-v17 [data-cat]::after,
+.wyld-homepage-v17 a[href*="/collections/bundles"]:has(.hover-cta)::after {
+  background: #2E332C !important;
+  background-color: #2E332C !important;
+  color: #FAF6EE !important;
+  border: 1px solid #2E332C !important;
+}
+.product-form__buttons button[type="submit"]:hover,
+.product-form__submit:hover,
+.subscription-button:hover,
+.button--primary:hover,
+.wyld-h__cta:hover,
+.wyld-h__quiz-cta:hover,
+.wyld-product-card__add:hover,
+.wyld-h__mega-card-add:hover:not(:disabled),
+.wyld-homepage-v17 a[href][style*="background:var(--wyld-forest"]:hover,
+.wyld-homepage-v17 a[href*="wyld-hearts"][style*="background"]:hover,
+.wyld-homepage-v17 [data-cat]:hover::after,
+.wyld-homepage-v17 a[href*="/collections/bundles"]:has(.hover-cta):hover::after {
+  background: #1F2421 !important;
+  border-color: #1F2421 !important;
+  color: #FAF6EE !important;
+}
+
+/* Hero photo SHOP NOW stays white (locked) */
+.wyld-homepage-v17 a[href="#products"]:not([class]) {
+  background: #FFFFFF !important;
+  color: #2E332C !important;
+}
+
+/* === Elate/Aesop hybrid: outline product cards, solid for hero/single-focus ===
+   Product card SHOP NOW / SHOP BUNDLE ::after → OUTLINE ink rectangle (distributed)
+   Hero/Subscribe/Newsletter/Quiz CTAs stay SOLID ink (single-focus moments) */
+.wyld-homepage-v17 [data-cat]::after,
+.wyld-homepage-v17 a[href*="/collections/bundles"]:has(.hover-cta)::after {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #2E332C !important;
+  border: 1px solid #2E332C !important;
+}
+.wyld-homepage-v17 [data-cat]:hover::after,
+.wyld-homepage-v17 a[href*="/collections/bundles"]:has(.hover-cta):hover::after {
+  background: #2E332C !important;
+  border-color: #2E332C !important;
+  color: #FAF6EE !important;
+}
+
+/* Mega menu Quick Add → outline (distributed product cards in mega) */
+.wyld-product-card__add,
+.wyld-h__mega-card-add {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #2E332C !important;
+  border: 1px solid #2E332C !important;
+}
+.wyld-product-card__add:hover,
+.wyld-h__mega-card-add:hover:not(:disabled) {
+  background: #2E332C !important;
+  border-color: #2E332C !important;
+  color: #FAF6EE !important;
+}
+
+/* === Hero photo SHOP NOW → solid ink (Devon 2026-05-29) ===
+   Was white per old locked rule. Now matches the rest of the solid-ink system. */
+.wyld-homepage-v17 a[href="#products"]:not([class]),
+.wyld-homepage-v17 a[href="#products"]:not([class]):hover {
+  background: #2E332C !important;
+  background-color: #2E332C !important;
+  color: #FAF6EE !important;
+  border: 1px solid #2E332C !important;
+  border-color: #2E332C !important;
+}
+.wyld-homepage-v17 a[href="#products"]:not([class]):hover {
+  background: #1F2421 !important;
+  border-color: #1F2421 !important;
+}
+
+/* === 2026-05-29 — REVERT product cards to SOLID INK ===
+   Devon: one button language. All buttons solid ink, no outline tier. */
+.wyld-homepage-v17 [data-cat]::after,
+.wyld-homepage-v17 a[href*="/collections/bundles"]:has(.hover-cta)::after {
+  background: #2E332C !important;
+  background-color: #2E332C !important;
+  color: #FAF6EE !important;
+  border: 1px solid #2E332C !important;
+}
+.wyld-homepage-v17 [data-cat]:hover::after,
+.wyld-homepage-v17 a[href*="/collections/bundles"]:has(.hover-cta):hover::after {
+  background: #1F2421 !important;
+  border-color: #1F2421 !important;
+  color: #FAF6EE !important;
+}
+
+/* Mega menu Quick Add → solid ink */
+.wyld-product-card__add,
+.wyld-h__mega-card-add {
+  background: #2E332C !important;
+  background-color: #2E332C !important;
+  color: #FAF6EE !important;
+  border: 1px solid #2E332C !important;
+}
+.wyld-product-card__add:hover,
+.wyld-h__mega-card-add:hover:not(:disabled) {
+  background: #1F2421 !important;
+  border-color: #1F2421 !important;
+  color: #FAF6EE !important;
+}
+
+/* === Micro rose accents — bring brand color back to small moments ===
+   Devon: keep rose on cart badge + logo hover for tiny color accents in the
+   otherwise muted ink/cream system. */
+.wyld-h__cart-count {
+  background: #9A6B65 !important;
+  color: #FAF6EE !important;
+}
+.wyld-h__logo:hover,
+.wyld-h__logo:hover .wyld-h__logo-text {
+  color: #9A6B65 !important;
+}
+.wyld-h__logo:hover .wyld-h__logo-mark {
+  color: #9A6B65 !important;
+}
+/* Active category tab indicator stays rose (already deployed, re-affirm) */
+.wyld-homepage-v17 button[onclick^="nwFilter"] {
+  --charcoal: #9A6B65 !important;
+}
+
+/* === Re-flip product cards to OUTLINE (hybrid 2-tier system + editorial arrows) ===
+   Final: solid ink for major CTAs, outline ink for product cards, arrow text-link
+   for Wyld Standard editorial column. 3 distinct intents. */
+.wyld-homepage-v17 [data-cat]::after,
+.wyld-homepage-v17 a[href*="/collections/bundles"]:has(.hover-cta)::after {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #2E332C !important;
+  border: 1px solid #2E332C !important;
+}
+.wyld-homepage-v17 [data-cat]:hover::after,
+.wyld-homepage-v17 a[href*="/collections/bundles"]:has(.hover-cta):hover::after {
+  background: #2E332C !important;
+  border-color: #2E332C !important;
+  color: #FAF6EE !important;
+}
+
+/* === 2026-05-29 — SLIDE-FILL HOVER ANIMATION on outline buttons (Aesop/Elate pattern) ===
+   On hover, ink fill sweeps in from left to right. 280ms ease-out.
+   Uses background-position trick (works on ::after pseudos). */
+
+/* Product card SHOP NOW + Bundle card SHOP BUNDLE — outline + slide-fill */
+.wyld-homepage-v17 [data-cat]::after,
+.wyld-homepage-v17 a[href*="/collections/bundles"]:has(.hover-cta)::after {
+  background: linear-gradient(to right, #2E332C 50%, transparent 50%) !important;
+  background-size: 220% 100% !important;
+  background-position: right bottom !important;
+  color: #2E332C !important;
+  border: 1px solid #2E332C !important;
+  transition: background-position 600ms cubic-bezier(.22,.61,.36,1),
+              color 600ms cubic-bezier(.22,.61,.36,1) !important;
+}
+.wyld-homepage-v17 [data-cat]:hover::after,
+.wyld-homepage-v17 a[href*="/collections/bundles"]:has(.hover-cta):hover::after {
+  background-position: left bottom !important;
+  color: #FAF6EE !important;
+  border-color: #2E332C !important;
+}
+
+/* Hover state for "Read our story" outline button — slide-fill on hover */
+.wyld-homepage-v17 a.wyld-story-cta:hover {
+  background-position: left bottom !important;
+  color: #FAF6EE !important;
+}
+
+/* === Testimonial hover product reveal SHOP NOW + Header TAKE THE QUIZ ===
+   Convert both from solid → outline with slide-fill (matches product cards) */
+
+/* Testimonial hover product reveal Shop Now → outline + slide-fill */
+.wyld-homepage-v17 .testimonial-product-reveal a {
+  background: linear-gradient(to right, #2E332C 50%, transparent 50%) !important;
+  background-size: 220% 100% !important;
+  background-position: right bottom !important;
+  color: #2E332C !important;
+  border: 1px solid #2E332C !important;
+  border-radius: 0 !important;
+  padding: 10px 18px !important;
+  font-family: var(--font-subheading-family) !important;
+  font-size: 10.5px !important;
+  letter-spacing: 0.14em !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  transition: background-position 600ms cubic-bezier(.22,.61,.36,1),
+              color 600ms cubic-bezier(.22,.61,.36,1) !important;
+}
+.wyld-homepage-v17 .testimonial-product-reveal a:hover {
+  background-position: left bottom !important;
+  color: #FAF6EE !important;
+}
+
+/* Header TAKE THE QUIZ → outline + slide-fill */
+.wyld-h__quiz-cta,
+.wyld-h__cta {
+  background: linear-gradient(to right, #2E332C 50%, transparent 50%) !important;
+  background-size: 220% 100% !important;
+  background-position: right bottom !important;
+  color: #2E332C !important;
+  border: 1px solid #2E332C !important;
+  border-radius: 0 !important;
+  transition: background-position 600ms cubic-bezier(.22,.61,.36,1),
+              color 600ms cubic-bezier(.22,.61,.36,1) !important;
+}
+.wyld-h__quiz-cta:hover,
+.wyld-h__cta:hover {
+  background-position: left bottom !important;
+  color: #FAF6EE !important;
+  border-color: #2E332C !important;
+}
+
+/* === Mobile: hide redundant "Free shipping on orders $50+" hero CTA ===
+   Devon: announcement bar already shows it. Mobile = 1 CTA hero. */
+@media (max-width: 768px) {
+  .wyld-homepage-v17 section span[style*="rgba(255,255,255,0.12)"],
+  .wyld-homepage-v17 section span[style*="rgba(255, 255, 255, 0.12)"] {
+    display: none !important;
+  }
+}
+
+/* === Mobile: make Find your Wyld tab nav horizontally scrollable ===
+   Tabs overflow off-screen on mobile. Make container scroll. */
+@media (max-width: 768px) {
+  /* The tab nav container = first <div> after section heading, has display:flex */
+  .wyld-homepage-v17 div[style*="border-bottom:1px solid #e8e4de"][style*="display:flex"] {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    flex-wrap: nowrap !important;
+    margin-left: -16px !important;
+    margin-right: -16px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  .wyld-homepage-v17 div[style*="border-bottom:1px solid #e8e4de"][style*="display:flex"]::-webkit-scrollbar {
+    display: none !important;
+  }
+  /* Make each tab button NOT wrap + tighter padding on mobile */
+  .wyld-homepage-v17 button[onclick^="nwFilter"] {
+    white-space: nowrap !important;
+    padding: 12px 16px !important;
+    flex-shrink: 0 !important;
+    font-size: 10.5px !important;
+  }
+}
+
+/* === Mobile: product grid 4-col → 1-col below 600px (no squishing) ===
+   Tablet 600-1024px = 2-col, mobile <600px = 1-col full width. */
+@media (max-width: 1024px) and (min-width: 601px) {
+  .wyld-homepage-v17 #nwGrid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 600px) {
+  .wyld-homepage-v17 #nwGrid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+  /* Reduce image container height on mobile so single-column doesn't look stretched */
+  .wyld-homepage-v17 [data-cat] > div:first-child {
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+  }
+  /* Editorial Explore card on mobile = no fixed height */
+  .wyld-homepage-v17 [data-cat="favorites"][onclick*="all-products"] {
+    height: auto !important;
+    min-height: 420px !important;
+    aspect-ratio: 4 / 5 !important;
+  }
+}
+
+/* === Mobile: bundle grid 1-col + lifestyle card aspect ratio ===
+   Bundles grid uses inline 'grid-template-columns:1fr repeat(3,1fr)'.
+   Force 1-col below 600px + give lifestyle card a saner aspect ratio. */
+@media (max-width: 1024px) and (min-width: 601px) {
+  .wyld-homepage-v17 div[style*="grid-template-columns:1fr repeat(3,1fr)"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 600px) {
+  .wyld-homepage-v17 div[style*="grid-template-columns:1fr repeat(3,1fr)"] {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+  /* Editorial "Build Your Own Bundle" lifestyle card on mobile = aspect ratio cap */
+  .wyld-homepage-v17 a[href*="/collections/bundles"][style*="height:464px"] {
+    height: auto !important;
+    aspect-ratio: 4 / 5 !important;
+    min-height: 0 !important;
+  }
+  /* Bundle product card images also become aspect-ratio'd on mobile */
+  .wyld-homepage-v17 a[href*="/collections/bundles"] > div:first-child[style*="height:340px"] {
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+  }
+}
+
+/* === Mobile: Wyld Standard column alignment ===
+   Original CSS gives cols 2-4 padding-left:36px (for divider/border indent) but col 1 has padding-left:0.
+   On mobile that creates a visual mismatch — col 1 hugs the left edge, others are indented.
+   Equalize: force all cols to the same 36px left padding on mobile. */
+@media (max-width: 768px) {
+  .wyld-homepage-v17 .wyld-standard-num {
+    display: block !important;
+    margin: 0 0 12px 0 !important;
+    padding: 0 !important;
+    text-indent: 0 !important;
+  }
+  .wyld-homepage-v17 .wyld-standard-col {
+    padding-left: 36px !important;
+  }
+}
+
+/* === Subscribe section CTA — dark-bg outline with cream slide-fill ===
+   On the dark ink subscribe section, outline button = cream border/text,
+   fills cream on hover (text flips to ink). Mirror of the cream-bg pattern. */
+.wyld-homepage-v17 a.wyld-subscribe-cta:hover {
+  background-position: left bottom !important;
+  color: #2E332C !important;
+}
+
+/* === Quiz banner section — restore dark ink bg ===
+   Earlier rule at line ~1479 was too greedy: it stripped bg from anything with
+   inline `background:var(--wyld-forest)` — including the quiz banner SECTION,
+   not just buttons. That made the section transparent → cream-on-cream invisible
+   text. Restore dark ink bg for the section specifically. */
+.wyld-homepage-v17 section[style*="background:var(--wyld-forest"] {
+  background: #2E332C !important;
+  background-color: #2E332C !important;
+}
+
+/* === Defend the slide-fill CTAs against the catch-all overrides ===
+   .wyld-subscribe-cta (dark bg, cream outline) and .wyld-story-cta (cream bg, ink outline)
+   have inline linear-gradient backgrounds — but other rules with !important are stripping them.
+   Force the gradient + correct border with high-specificity !important rules. */
+
+.wyld-homepage-v17 a.wyld-subscribe-cta[href],
+.wyld-homepage-v17 a.wyld-subscribe-cta,
+a.wyld-subscribe-cta[href],
+a.wyld-subscribe-cta {
+  background: linear-gradient(to right, #FAF6EE 50%, transparent 50%) !important;
+  background-color: transparent !important;
+  background-size: 220% 100% !important;
+  background-position: right bottom !important;
+  color: #FAF6EE !important;
+  border: 1px solid #FAF6EE !important;
+  padding: 18px 38px !important;
+  font-size: 12.5px !important;
+  letter-spacing: 0.18em !important;
+  transition: background-position 600ms cubic-bezier(.22,.61,.36,1),
+              color 600ms cubic-bezier(.22,.61,.36,1) !important;
+}
+.wyld-homepage-v17 a.wyld-subscribe-cta[href]:hover,
+.wyld-homepage-v17 a.wyld-subscribe-cta:hover,
+a.wyld-subscribe-cta:hover {
+  background-position: left bottom !important;
+  color: #2E332C !important;
+  border-color: #FAF6EE !important;
+}
+
+.wyld-homepage-v17 a.wyld-story-cta[href],
+.wyld-homepage-v17 a.wyld-story-cta,
+a.wyld-story-cta[href],
+a.wyld-story-cta {
+  background: linear-gradient(to right, #2E332C 50%, transparent 50%) !important;
+  background-color: transparent !important;
+  background-size: 220% 100% !important;
+  background-position: right bottom !important;
+  color: #2E332C !important;
+  border: 1px solid #2E332C !important;
+  transition: background-position 600ms cubic-bezier(.22,.61,.36,1),
+              color 600ms cubic-bezier(.22,.61,.36,1) !important;
+}
+.wyld-homepage-v17 a.wyld-story-cta[href]:hover,
+.wyld-homepage-v17 a.wyld-story-cta:hover,
+a.wyld-story-cta:hover {
+  background-position: left bottom !important;
+  color: #FAF6EE !important;
+  border-color: #2E332C !important;
+}
+
+.wyld-homepage-v17 a.wyld-quiz-cta,
+a.wyld-quiz-cta {
+  background: linear-gradient(to right, #2E332C 50%, transparent 50%) !important;
+  background-color: transparent !important;
+  background-size: 220% 100% !important;
+  background-position: right bottom !important;
+  color: #2E332C !important;
+  border: 1px solid #2E332C !important;
+  transition: background-position 600ms cubic-bezier(.22,.61,.36,1),
+              color 600ms cubic-bezier(.22,.61,.36,1) !important;
+}
+.wyld-homepage-v17 a.wyld-quiz-cta:hover,
+a.wyld-quiz-cta:hover {
+  background-position: left bottom !important;
+  color: #E8D5CE !important;
+  border-color: #2E332C !important;
+}
+
+/* === Unified card CTA — slide-fill outlined cream → solid cream ===
+   For use inside dark hover overlays on bundle + product cards. */
+.wyld-homepage-v17 a.wyld-card-cta,
+.wyld-homepage-v17 span.wyld-card-cta,
+.wyld-homepage-v17 .wyld-card-cta,
+a.wyld-card-cta,
+span.wyld-card-cta,
+.wyld-card-cta {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  background: linear-gradient(to right, #FAF6EE 50%, transparent 50%) !important;
+  background-color: transparent !important;
+  background-size: 220% 100% !important;
+  background-position: right bottom !important;
+  color: #FAF6EE !important;
+  border: 1px solid #FAF6EE !important;
+  padding: 12px 26px !important;
+  font-family: var(--font-subheading-family) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  transition: background-position 600ms cubic-bezier(.22,.61,.36,1),
+              color 600ms cubic-bezier(.22,.61,.36,1) !important;
+}
+.wyld-homepage-v17 a.wyld-card-cta:hover,
+.wyld-homepage-v17 span.wyld-card-cta:hover,
+.wyld-card-cta:hover {
+  background-position: left bottom !important;
+  color: #2E332C !important;
+}
+
+/* === Testimonial card Shop Now — ink outline on cream bg === */
+.wyld-homepage-v17 a.wyld-testi-cta,
+a.wyld-testi-cta {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  background: linear-gradient(to right, #2E332C 50%, transparent 50%) !important;
+  background-color: transparent !important;
+  background-size: 220% 100% !important;
+  background-position: right bottom !important;
+  color: #2E332C !important;
+  border: 1px solid #2E332C !important;
+  padding: 11px 22px !important;
+  font-family: var(--font-subheading-family) !important;
+  font-size: 10.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  transition: background-position 600ms cubic-bezier(.22,.61,.36,1),
+              color 600ms cubic-bezier(.22,.61,.36,1) !important;
+}
+.wyld-homepage-v17 a.wyld-testi-cta:hover,
+a.wyld-testi-cta:hover {
+  background-position: left bottom !important;
+  color: #FAF6EE !important;
+  border-color: #2E332C !important;
+}
+
+/* === FINAL: product card + bundle ::after pseudo-buttons get the SAME slide-fill
+   animation as the .wyld-quiz-cta. Quiz timing is 320ms cubic-bezier with slide
+   from right→left. Previous ::after rules used 220ms ease (too fast) with a
+   flat color swap (no slide direction). This block is the source-order winner. */
+.wyld-homepage-v17 [data-cat]::after,
+.wyld-homepage-v17 a[href*="/collections/bundles"]:has(.hover-cta)::after {
+  background: linear-gradient(to right, #2E332C 50%, transparent 50%) !important;
+  background-color: transparent !important;
+  background-size: 220% 100% !important;
+  background-position: right bottom !important;
+  color: #2E332C !important;
+  border: 1px solid #2E332C !important;
+  transition: background-position 600ms cubic-bezier(.22,.61,.36,1),
+              color 600ms cubic-bezier(.22,.61,.36,1) !important;
+}
+.wyld-homepage-v17 [data-cat]:hover::after,
+.wyld-homepage-v17 a[href*="/collections/bundles"]:has(.hover-cta):hover::after {
+  background-position: left bottom !important;
+  color: #FAF6EE !important;
+  border-color: #2E332C !important;
+}
+
+/* === Shop By Category tiles — editorial natural hover === */
+.wyld-homepage-v17 a.wyld-cat-tile:hover .swbg {
+  transform: scale(1.05) !important;
+}
+.wyld-homepage-v17 a.wyld-cat-tile .wyld-card-cta {
+  margin-top: 4px;
+}
+@media (max-width: 768px) {
+  .wyld-homepage-v17 .wyld-cat-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .wyld-homepage-v17 a.wyld-cat-tile {
+    height: 380px !important;
+  }
+  .wyld-homepage-v17 a.wyld-cat-tile h3 {
+    font-size: 30px !important;
+  }
+}
+
+/* === Footer social icon buttons === */
+.wyld-homepage-v17 .wyld-footer-social a.wyld-social-icon,
+.wyld-footer .wyld-footer-social a.wyld-social-icon {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255,255,255,0.20);
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.62);
+  text-decoration: none;
+  transition: color 220ms ease, border-color 220ms ease, background-color 220ms ease;
+}
+.wyld-homepage-v17 .wyld-footer-social a.wyld-social-icon:hover,
+.wyld-footer .wyld-footer-social a.wyld-social-icon:hover {
+  color: #2E332C;
+  background: #FAF6EE;
+  border-color: #FAF6EE;
+}
+
+/* === Instagram feed tiles — hover IG icon reveal === */
+.wyld-homepage-v17 a.wyld-ig-tile:hover img {
+  transform: scale(1.05) !important;
+}
+.wyld-homepage-v17 a.wyld-ig-tile:hover .wyld-ig-overlay {
+  background: rgba(46,51,44,0.5) !important;
+}
+.wyld-homepage-v17 a.wyld-ig-tile:hover .wyld-ig-overlay svg {
+  opacity: 1 !important;
+}
+@media (max-width: 768px) {
+  .wyld-homepage-v17 .wyld-ig-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+}
+
+/* === Shop The Feed — shoppable shorts tiles === */
+.wyld-homepage-v17 .wyld-shorts-tile a:hover .wyld-shorts-media,
+.wyld-homepage-v17 a:hover > .wyld-shorts-media {
+  transform: scale(1.05) !important;
+}
+.wyld-homepage-v17 a.wyld-shop-cta {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: linear-gradient(to right, #2E332C 50%, transparent 50%) !important;
+  background-color: transparent !important;
+  background-size: 220% 100% !important;
+  background-position: right bottom !important;
+  color: #2E332C !important;
+  border: 1px solid #2E332C !important;
+  padding: 11px 22px !important;
+  font-family: var(--font-subheading-family) !important;
+  font-size: 10.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  transition: background-position 600ms cubic-bezier(.22,.61,.36,1), color 600ms cubic-bezier(.22,.61,.36,1) !important;
+}
+.wyld-homepage-v17 a.wyld-shop-cta:hover {
+  background-position: left bottom !important;
+  color: #FAF6EE !important;
+}
+@media (max-width: 768px) {
+  .wyld-homepage-v17 .wyld-shorts-grid {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+}
+
+/* === Shop The Feed — mobile horizontal scroll === */
+@media (max-width: 768px) {
+  .wyld-homepage-v17 .wyld-shorts {
+    padding: 56px 0 !important;
+  }
+  .wyld-homepage-v17 .wyld-shorts-grid {
+    display: flex !important;
+    grid-template-columns: none !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 14px !important;
+    padding: 0 20px 20px !important;
+    margin: 0 -20px !important;
+    scrollbar-width: none;
+  }
+  .wyld-homepage-v17 .wyld-shorts-grid::-webkit-scrollbar { display: none; }
+  .wyld-homepage-v17 .wyld-shorts-tile,
+  .wyld-homepage-v17 .wyld-shorts-grid > a.wyld-reel-tile {
+    flex: 0 0 72% !important;
+    scroll-snap-align: start !important;
+    aspect-ratio: 9/16 !important;
+    width: 72% !important;
+    max-width: 72% !important;
+  }
+  .wyld-homepage-v17 .wyld-shorts-tile a[style*="aspect-ratio:9/16"] {
+    aspect-ratio: 4/5 !important;
+  }
+  /* Ensure media inside reel tiles fills the constrained tile box */
+  .wyld-homepage-v17 .wyld-shorts-grid > a.wyld-reel-tile video,
+  .wyld-homepage-v17 .wyld-shorts-grid > a.wyld-reel-tile img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+  .wyld-homepage-v17 .wyld-shorts-tile h3 {
+    font-size: 16px !important;
+  }
+  .wyld-homepage-v17 .wyld-shorts-tile a.wyld-shop-cta {
+    padding: 10px 18px !important;
+    font-size: 10px !important;
+  }
+}
+
+/* === Shop By Category — tighter mobile === */
+@media (max-width: 768px) {
+  .wyld-homepage-v17 a.wyld-cat-tile {
+    height: 340px !important;
+  }
+  .wyld-homepage-v17 a.wyld-cat-tile h3 {
+    font-size: 26px !important;
+  }
+}
+
+/* === IG feed (legacy class kept for safety) — mobile horizontal === */
+@media (max-width: 768px) {
+  .wyld-homepage-v17 .wyld-ig-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* === MOBILE UX PASS 2026-05-31 — tighten layout, reduce vertical scroll === */
+
+/* Find Your Wyld product grid: 1-col stacked = TOO LONG. Go 2-col on mobile.
+   minmax(0, 1fr) forces columns to FIT viewport — otherwise child intrinsic widths overflow. */
+@media (max-width: 768px) {
+  .wyld-homepage-v17 #nwGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+  .wyld-homepage-v17 #nwGrid > div {
+    height: auto !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+  /* Card image container — force 1:1 + width 100% */
+  .wyld-homepage-v17 #nwGrid > div > div:first-child {
+    aspect-ratio: 1 / 1 !important;
+    height: auto !important;
+    width: 100% !important;
+  }
+  /* Compress per-card text */
+  .wyld-homepage-v17 #nwGrid h3 {
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+    margin-bottom: 4px !important;
+  }
+  .wyld-homepage-v17 #nwGrid p {
+    font-size: 11px !important;
+    margin-bottom: 6px !important;
+    -webkit-line-clamp: 2 !important;
+  }
+  .wyld-homepage-v17 #nwGrid [data-cat]::after {
+    font-size: 9px !important;
+    padding: 9px 14px !important;
+    margin-top: 12px !important;
+  }
+}
+
+/* Subscribe section: stack to single column on mobile (was 1.1fr 1fr - squished) */
+@media (max-width: 768px) {
+  .wyld-homepage-v17 #subscribe {
+    padding: 56px 0 !important;
+  }
+  .wyld-homepage-v17 #subscribe > .container > div[style*="grid-template-columns:1.1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 36px !important;
+  }
+  .wyld-homepage-v17 #subscribe h2 {
+    font-size: 32px !important;
+  }
+}
+
+/* Editorial story 2fr 3fr → stack vertically on mobile */
+@media (max-width: 768px) {
+  .wyld-homepage-v17 section[style*="grid-template-columns:2fr 3fr"] {
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+  }
+  .wyld-homepage-v17 section[style*="grid-template-columns:2fr 3fr"] > div:first-child {
+    padding: 48px 24px !important;
+  }
+  .wyld-homepage-v17 section[style*="grid-template-columns:2fr 3fr"] > div:last-child {
+    height: 380px !important;
+  }
+}
+
+/* Hero: tighter on mobile, smaller text, no awkward gaps */
+@media (max-width: 768px) {
+  .wyld-homepage-v17 section[style*="78vh"] {
+    height: 72vh !important;
+    min-height: 460px !important;
+    max-height: 640px !important;
+  }
+  .wyld-homepage-v17 section[style*="78vh"] > div[style*="bottom:120px"] {
+    bottom: 60px !important;
+    left: 24px !important;
+    right: 24px !important;
+    padding: 0 !important;
+  }
+  .wyld-homepage-v17 section[style*="78vh"] h1 {
+    font-size: 38px !important;
+  }
+}
+
+/* Testimonials: tighter cards on mobile, 1-col already but compress padding */
+@media (max-width: 768px) {
+  .wyld-homepage-v17 .wyld-testimonial-card {
+    padding: 24px 0 !important;
+  }
+  .wyld-homepage-v17 .wyld-testimonial-quote {
+    font-size: 17px !important;
+    line-height: 1.5 !important;
+  }
+}
+
+/* Wyld Standard "01 02 03 04" columns: compress on mobile */
+@media (max-width: 768px) {
+  .wyld-homepage-v17 .wyld-standard-num {
+    font-size: 36px !important;
+  }
+  .wyld-homepage-v17 .wyld-standard-col h3 {
+    font-size: 17px !important;
+  }
+  .wyld-homepage-v17 .wyld-standard-col p {
+    font-size: 13px !important;
+  }
+}
+
+/* Footer: less vertical padding, tighter link list */
+@media (max-width: 768px) {
+  .wyld-homepage-v17 .wyld-footer {
+    padding: 48px 0 24px !important;
+  }
+  .wyld-homepage-v17 .wyld-footer-grid {
+    gap: 28px !important;
+  }
+}
+
+/* Quiz banner: stack vertically on mobile (was grid 1fr auto) */
+@media (max-width: 768px) {
+  .wyld-homepage-v17 section[style*="background:#EDE2D8"] > .container {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+    text-align: center;
+  }
+  .wyld-homepage-v17 section[style*="background:#EDE2D8"] a.wyld-quiz-cta {
+    margin: 0 auto !important;
+  }
+}
+
+/* Wyld Hearts "1000+" callout box: compress on mobile */
+@media (max-width: 768px) {
+  .wyld-homepage-v17 div[style*="font-size:64px"][style*="font-family:var(--font-serif)"] {
+    font-size: 42px !important;
+  }
+}
+
+/* Section header consistency: tighter margin on mobile */
+@media (max-width: 768px) {
+  .wyld-homepage-v17 .container[style*="margin-bottom:48px"] {
+    margin-bottom: 30px !important;
+  }
+  .wyld-homepage-v17 section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* === Bundles section: 3-col grid (BYO tall + 2x2 product bundles) → 2-col on mobile.
+   BYO override must use a:not(.wyld-byob-tile) or same-class anchor to win over generic > a rule. */
+@media (max-width: 768px) {
+  .wyld-homepage-v17 .wyld-bundles-grid {
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: auto !important;
+    gap: 12px !important;
+  }
+  .wyld-homepage-v17 .wyld-bundles-grid > a:not(.wyld-byob-tile) {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+  .wyld-homepage-v17 .wyld-bundles-grid > a.wyld-byob-tile {
+    grid-column: 1 / -1 !important;
+    grid-row: 1 !important;
+    min-height: 560px !important;
+    height: 70vh !important;
+    max-height: 720px !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  /* Defend grid container against child overflow */
+  .wyld-homepage-v17 .wyld-bundles-grid {
+    overflow: hidden;
+  }
+}
+
+/* === MCC bundle card uses /collections/multi-sticks URL — needs same SHOP BUNDLE ::after === */
+.wyld-homepage-v17 .wyld-bundles-grid a[href*="/collections/multi-sticks"],
+.wyld-homepage-v17 .wyld-bundles-grid a[href*="/products/pick-3-save-deodorant-bundle"],
+.wyld-homepage-v17 .wyld-bundles-grid a[href*="/products/ozonated-olive-oil-bundle"],
+.wyld-homepage-v17 .wyld-bundles-grid a[href*="/products/ozonated-toothcare-bundle"] {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100%;
+}
+.wyld-homepage-v17 .wyld-bundles-grid a[href*="/collections/multi-sticks"] .hover-cta,
+.wyld-homepage-v17 .wyld-bundles-grid a[href*="/products/pick-3-save-deodorant-bundle"] .hover-cta,
+.wyld-homepage-v17 .wyld-bundles-grid a[href*="/products/ozonated-olive-oil-bundle"] .hover-cta,
+.wyld-homepage-v17 .wyld-bundles-grid a[href*="/products/ozonated-toothcare-bundle"] .hover-cta {
+  display: none !important;
+}
+.wyld-homepage-v17 .wyld-bundles-grid a[href*="/collections/multi-sticks"]::after,
+.wyld-homepage-v17 .wyld-bundles-grid a[href*="/products/pick-3-save-deodorant-bundle"]::after,
+.wyld-homepage-v17 .wyld-bundles-grid a[href*="/products/ozonated-olive-oil-bundle"]::after,
+.wyld-homepage-v17 .wyld-bundles-grid a[href*="/products/ozonated-toothcare-bundle"]::after {
+  content: "SHOP BUNDLE";
+  display: block;
+  margin-top: 22px;
+  padding: 13px 24px;
+  background: linear-gradient(to right, #2E332C 50%, transparent 50%) !important;
+  background-color: transparent !important;
+  background-size: 220% 100% !important;
+  background-position: right bottom !important;
+  color: #2E332C !important;
+  border: 1px solid #2E332C !important;
+  border-radius: 0;
+  font-family: var(--font-subheading-family);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1;
+  transition: background-position 600ms cubic-bezier(.22,.61,.36,1), color 600ms cubic-bezier(.22,.61,.36,1) !important;
+}
+.wyld-homepage-v17 .wyld-bundles-grid a[href*="/collections/multi-sticks"]:hover::after,
+.wyld-homepage-v17 .wyld-bundles-grid a[href*="/products/pick-3-save-deodorant-bundle"]:hover::after,
+.wyld-homepage-v17 .wyld-bundles-grid a[href*="/products/ozonated-olive-oil-bundle"]:hover::after,
+.wyld-homepage-v17 .wyld-bundles-grid a[href*="/products/ozonated-toothcare-bundle"]:hover::after {
+  background-position: left bottom !important;
+  color: #FAF6EE !important;
+}
+
+/* === MCC bundle: desktop hidden, mobile visible === */
+@media (min-width: 769px) {
+  .wyld-homepage-v17 .wyld-bundles-grid > a.wyld-mcc-bundle {
+    display: none !important;
+  }
+}
+
+/* === Equalize bundle product card heights with category tile heights (desktop only) === */
+@media (min-width: 769px) {
+  /* Bundle product card images: fixed 340px on desktop instead of aspect 1/1.
+     Combined with ~140px text below = ~480px total, matches cat tiles. */
+  .wyld-homepage-v17 .wyld-bundles-grid > a:not(.wyld-byob-tile) > div[style*="aspect-ratio:1/1"] {
+    aspect-ratio: auto !important;
+    height: 340px !important;
+  }
+  /* BYO tall card stays 464px but bump to 480px to match cat tiles exactly */
+  .wyld-homepage-v17 .wyld-bundles-grid > a.wyld-byob-tile {
+    height: 480px !important;
+  }
+}
+
+/* === Reels tile hover — subtle scale on the inner media === */
+.wyld-homepage-v17 a.wyld-reel-tile:hover video,
+.wyld-homepage-v17 a.wyld-reel-tile:hover img {
+  transform: scale(1.04);
+  transition: transform 700ms cubic-bezier(.22,.61,.36,1);
+}
+.wyld-homepage-v17 a.wyld-reel-tile video,
+.wyld-homepage-v17 a.wyld-reel-tile img {
+  transition: transform 700ms cubic-bezier(.22,.61,.36,1);
+}
+
+/* === Find Your Wyld: Explore lifestyle card stretches to match neighbor product card height on mobile.
+   Previous attempt with aspect-ratio:1/1 made it too short (170px vs MCC at 393px) leaving an awkward gap.
+   Now: align-self stretch so the grid forces same height; image inside fills the stretched card via object-fit cover. */
+@media (max-width: 768px) {
+  .wyld-homepage-v17 [data-cat="favorites"][onclick*="all-products"] {
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: auto !important;
+    align-self: stretch !important;
+  }
+}
+
+/* === Klaviyo footer opt-in: blend background into dark footer === */
+.wyld-footer .klaviyo-form-WETH6J,
+.wyld-footer .klaviyo-form-WETH6J > div,
+.wyld-footer .klaviyo-form-WETH6J [class*="needsclick"],
+.wyld-footer .klaviyo-form-WETH6J [class*="kl-private"],
+.wyld-footer .klaviyo-form-WETH6J form,
+.wyld-footer-newsletter .klaviyo-form-WETH6J,
+.wyld-footer-newsletter .klaviyo-form-WETH6J > div,
+.wyld-footer-newsletter .klaviyo-form-WETH6J [class*="needsclick"],
+.wyld-footer-newsletter .klaviyo-form-WETH6J [class*="kl-private"],
+.wyld-footer-newsletter .klaviyo-form-WETH6J form {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Email input: dark transparent + cream text/border */
+.wyld-footer .klaviyo-form-WETH6J input[type="email"],
+.wyld-footer-newsletter .klaviyo-form-WETH6J input[type="email"] {
+  background: rgba(250, 246, 238, 0.06) !important;
+  background-color: rgba(250, 246, 238, 0.06) !important;
+  border: 1px solid rgba(250, 246, 238, 0.28) !important;
+  color: #FAF6EE !important;
+}
+.wyld-footer .klaviyo-form-WETH6J input[type="email"]::placeholder,
+.wyld-footer-newsletter .klaviyo-form-WETH6J input[type="email"]::placeholder {
+  color: rgba(250, 246, 238, 0.55) !important;
+}
+
+/* === Testimonials header: hide aggregate rating on mobile (each card has its own ★★★★★) === */
+@media (max-width: 768px) {
+  .wyld-homepage-v17 .wyld-testi-aggregate-rating {
+    display: none !important;
+  }
+}
+
+/* === COHESION SWEEP 2026-06-01 ===
+   Hero Shop Now + Wyld Hearts Learn More + Footer Klaviyo Join → all to outlined slide-fill.
+   Hero is on dark photo → cream outline + cream fill on hover (text flips to ink).
+   Hearts is on cream → ink outline + ink fill on hover (text flips to cream).
+   Klaviyo Join is on dark footer → cream outline + cream fill on hover. */
+
+.wyld-homepage-v17 a.wyld-hero-cta[href],
+a.wyld-hero-cta[href],
+.wyld-homepage-v17 a.wyld-hero-cta,
+a.wyld-hero-cta {
+  background: linear-gradient(to right, #FAF6EE 50%, transparent 50%) !important;
+  background-color: transparent !important;
+  background-size: 220% 100% !important;
+  background-position: right bottom !important;
+  color: #FAF6EE !important;
+  border: 1px solid #FAF6EE !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28) !important;
+  transition: background-position 600ms cubic-bezier(.22,.61,.36,1),
+              color 600ms cubic-bezier(.22,.61,.36,1),
+              box-shadow 320ms ease !important;
+}
+.wyld-homepage-v17 a.wyld-hero-cta:hover,
+a.wyld-hero-cta:hover {
+  background-position: left bottom !important;
+  color: #2E332C !important;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.36) !important;
+}
+
+.wyld-homepage-v17 a.wyld-hearts-cta[href],
+a.wyld-hearts-cta[href],
+.wyld-homepage-v17 a.wyld-hearts-cta,
+a.wyld-hearts-cta {
+  background: linear-gradient(to right, #2E332C 50%, transparent 50%) !important;
+  background-color: transparent !important;
+  background-size: 220% 100% !important;
+  background-position: right bottom !important;
+  color: #2E332C !important;
+  border: 1px solid #2E332C !important;
+  transition: background-position 600ms cubic-bezier(.22,.61,.36,1),
+              color 600ms cubic-bezier(.22,.61,.36,1) !important;
+}
+.wyld-homepage-v17 a.wyld-hearts-cta:hover,
+a.wyld-hearts-cta:hover {
+  background-position: left bottom !important;
+  color: #FAF6EE !important;
+}
+
+/* Klaviyo Join button: outlined cream slide-fill on dark footer (matches subscribe CTA) */
+.wyld-footer .klaviyo-form-WETH6J button,
+.wyld-footer .klaviyo-form-WETH6J button[type="submit"],
+.wyld-footer .klaviyo-form-WETH6J .klaviyo-form-button,
+.wyld-footer-newsletter .klaviyo-form-WETH6J button,
+.wyld-footer-newsletter .klaviyo-form-WETH6J button[type="submit"] {
+  background: linear-gradient(to right, #FAF6EE 50%, transparent 50%) !important;
+  background-color: transparent !important;
+  background-size: 220% 100% !important;
+  background-position: right bottom !important;
+  color: #FAF6EE !important;
+  border: 1px solid #FAF6EE !important;
+  border-radius: 0 !important;
+  font-family: var(--font-subheading-family) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  padding: 14px 28px !important;
+  box-shadow: none !important;
+  transition: background-position 600ms cubic-bezier(.22,.61,.36,1),
+              color 600ms cubic-bezier(.22,.61,.36,1) !important;
+}
+.wyld-footer .klaviyo-form-WETH6J button:hover,
+.wyld-footer-newsletter .klaviyo-form-WETH6J button:hover {
+  background-position: left bottom !important;
+  color: #2E332C !important;
+}
+
+/* === Section padding unified — 72px desktop / 48px mobile ===
+   Some sections used 80, 90, 72, 64 — now everything anchors to 72/48. */
+.wyld-homepage-v17 section[style*="padding:80px 0"],
+.wyld-homepage-v17 section[style*="padding:90px 0"],
+.wyld-homepage-v17 section[style*="padding: 80px 0"],
+.wyld-homepage-v17 section[style*="padding: 90px 0"] {
+  padding-top: 72px !important;
+  padding-bottom: 72px !important;
+}
+@media (max-width: 768px) {
+  .wyld-homepage-v17 section[style*="padding"]:not([style*="78vh"]):not([style*="background:#EDE2D8"]) {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+}
+
+/* === Review star color override — terracotta → rose to match brand palette ===
+   Applies across product cards on collection pages, product pages, etc. */
+.jdgm-prev-badge__stars,
+.jdgm-star,
+.jdgm-rev__rating,
+.spr-icon-star,
+.spr-starrating .spr-icon,
+[class*="judgeme"] [class*="star"],
+[class*="review"] [class*="star"],
+.shopify-product-reviews-badge .spr-icon-star {
+  color: #9A6B65 !important;
+}
+/* Catch any inline-styled terracotta stars */
+[style*="color: #9C5259"][class*="star"],
+[style*="color:#9C5259"][class*="star"] {
+  color: #9A6B65 !important;
+}
+
+/* === Find Your Wyld product grid — Judge.me preview badge styling ===
+   Two size variants: large (favorites cards, own row) + small (inline next to price).
+   Hide the "no reviews yet" placeholder so empty products just collapse. */
+.wyld-jdgm-large .jdgm-prev-badge,
+.wyld-jdgm-small .jdgm-prev-badge {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+.wyld-jdgm-large .jdgm-prev-badge__stars {
+  font-size: 13px !important;
+  letter-spacing: 0.5px;
+  line-height: 1;
+}
+.wyld-jdgm-large .jdgm-prev-badge__text {
+  font-size: 11px !important;
+  color: var(--wyld-stone, #5F574D) !important;
+  font-family: var(--font-body-family, 'Jost', sans-serif);
+  font-weight: 400;
+}
+.wyld-jdgm-small .jdgm-prev-badge__stars {
+  font-size: 11px !important;
+  letter-spacing: 0.5px;
+  line-height: 1;
+}
+.wyld-jdgm-small .jdgm-prev-badge__text {
+  font-size: 11px !important;
+  color: var(--wyld-stone, #5F574D) !important;
+  font-family: var(--font-body-family, 'Jost', sans-serif);
+  font-weight: 400;
+}
+/* Hide the "Be the first to review" link on cards with no reviews */
+.wyld-jdgm-large .jdgm-prev-badge[data-average-rating="0.00"],
+.wyld-jdgm-small .jdgm-prev-badge[data-average-rating="0.00"] {
+  visibility: hidden;
+}
+
+/* === Routine Builder section — interactive build-your-routine picker ===
+   Sits between Find Your Wyld grid and Stats Bar. Chip-tabbed reveal.
+   Visual + functional: each routine's "Add to cart" pre-fills the cart with
+   3 variants via Shopify /cart/v1,v2,v3 permalink. */
+.wyld-routine-section {
+  padding: 90px 0 100px;
+  background: var(--wyld-cream-warm, #F4EFE6);
+  border-top: 1px solid rgba(31, 27, 23, 0.06);
+}
+.wyld-routine-header {
+  text-align: center;
+  max-width: 580px;
+  margin: 0 auto 44px;
+}
+.wyld-routine-eyebrow {
+  font-family: var(--font-body-family, 'Jost', sans-serif);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--wyld-stone, #5F574D);
+  margin-bottom: 14px;
+}
+.wyld-routine-title {
+  font-family: var(--font-serif, 'Cormorant Garamond', serif);
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 400;
+  color: var(--wyld-ink, #1F1B17);
+  margin: 0 0 14px;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+.wyld-routine-sub {
+  font-size: 15px;
+  color: var(--wyld-stone, #5F574D);
+  font-weight: 300;
+  line-height: 1.7;
+  margin: 0;
+}
+.wyld-routine-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 44px;
+}
+.wyld-routine-chip {
+  font-family: var(--font-body-family, 'Jost', sans-serif);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  color: var(--wyld-ink, #1F1B17);
+  background: transparent;
+  border: 1px solid rgba(31, 27, 23, 0.35);
+  border-radius: 100px;
+  padding: 12px 22px;
+  cursor: pointer;
+  transition: all 280ms cubic-bezier(.22,.61,.36,1);
+}
+.wyld-routine-chip:hover {
+  border-color: var(--wyld-ink, #1F1B17);
+  background: rgba(31, 27, 23, 0.04);
+}
+.wyld-routine-chip.wyld-routine-active {
+  background: var(--wyld-ink, #1F1B17);
+  color: var(--wyld-cream, #FDFCF8);
+  border-color: var(--wyld-ink, #1F1B17);
+}
+.wyld-routine-panel {
+  display: none;
+}
+.wyld-routine-panel.wyld-routine-active {
+  display: block;
+  animation: wyld-fade-in 380ms cubic-bezier(.22,.61,.36,1);
+}
+@keyframes wyld-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.wyld-routine-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 36px;
+}
+.wyld-routine-product {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 320ms cubic-bezier(.22,.61,.36,1);
+}
+.wyld-routine-product:hover {
+  transform: translateY(-4px);
+}
+.wyld-routine-image {
+  aspect-ratio: 1 / 1;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--wyld-cream, #FDFCF8);
+  margin-bottom: 18px;
+  overflow: hidden;
+  transition: filter 320ms ease;
+}
+.wyld-routine-product:hover .wyld-routine-image {
+  filter: brightness(1.04);
+}
+.wyld-routine-step {
+  display: block;
+  font-family: var(--font-body-family, 'Jost', sans-serif);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--wyld-rose, #9A6B65);
+  margin-bottom: 8px;
+}
+.wyld-routine-product-title {
+  font-family: var(--font-serif, 'Cormorant Garamond', serif);
+  font-size: 19px;
+  font-weight: 400;
+  color: var(--wyld-ink, #1F1B17);
+  margin: 0 0 6px;
+  line-height: 1.25;
+}
+.wyld-routine-product-desc {
+  font-size: 13px;
+  color: var(--wyld-stone, #5F574D);
+  margin: 0;
+  line-height: 1.5;
+  font-weight: 300;
+}
+.wyld-routine-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-top: 24px;
+  border-top: 1px solid rgba(31, 27, 23, 0.08);
+}
+.wyld-routine-blurb {
+  font-size: 14px;
+  color: var(--wyld-ink-soft, #2C2620);
+  font-weight: 300;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 480px;
+  font-style: italic;
+}
+.wyld-routine-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #2E332C;
+  background: linear-gradient(to right, #2E332C 50%, transparent 50%);
+  background-size: 220% 100%;
+  background-position: right bottom;
+  border: 1px solid #2E332C;
+  padding: 16px 32px;
+  font-family: var(--font-body-family, 'Jost', sans-serif);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-position 600ms cubic-bezier(.22,.61,.36,1), color 600ms cubic-bezier(.22,.61,.36,1);
+}
+.wyld-routine-cta:hover {
+  background-position: left bottom;
+  color: #FAF6EE;
+}
+@media (max-width: 768px) {
+  .wyld-routine-section { padding: 60px 0 70px; }
+  .wyld-routine-grid { grid-template-columns: 1fr; gap: 28px; margin-bottom: 28px; }
+  .wyld-routine-tabs { margin-bottom: 32px; gap: 6px; }
+  .wyld-routine-chip { padding: 10px 16px; font-size: 10.5px; letter-spacing: 1px; }
+  .wyld-routine-foot { flex-direction: column; align-items: stretch; text-align: center; }
+  .wyld-routine-cta { justify-content: center; }
+  .wyld-routine-blurb { max-width: 100%; }
+}
+
+/* === BYO bundle card CTA — outlined cream slide-fill button (premium, not DIY) ===
+   Sits inside the lifestyle "Build Your Own Bundle." editorial card. */
+.wyld-byo-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #FAF6EE;
+  background: linear-gradient(to right, #FAF6EE 50%, transparent 50%);
+  background-size: 220% 100%;
+  background-position: right bottom;
+  border: 1px solid #FAF6EE;
+  padding: 13px 26px;
+  font-family: var(--font-body-family, 'Jost', sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-position 600ms cubic-bezier(.22,.61,.36,1), color 600ms cubic-bezier(.22,.61,.36,1);
+}
+.wyld-byob-tile:hover .wyld-byo-cta {
+  background-position: left bottom;
+  color: #2E332C;
+}
+
+/* === Bundles "Build your routine" subscription CTA — premium block, not a small button ===
+   Custom subscription-box entry point (wires to Loop /pages/build-your-routine later).
+   Editorial header + serif promise + confident solid CTA + small reassurance footer. */
+.wyld-homepage-v17 .wyld-bundles-cta {
+  margin-top: 96px;
+  padding: 80px 40px 72px;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(31, 27, 23, 0.025) 0%, rgba(31, 27, 23, 0.06) 100%);
+  border-radius: 2px;
+}
+.wyld-homepage-v17 .wyld-bundles-cta-eyebrow {
+  font-family: var(--font-body-family, 'Jost', sans-serif);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--wyld-rose, #9A6B65);
+  margin: 0 0 22px;
+}
+.wyld-homepage-v17 .wyld-bundles-cta-headline {
+  font-family: var(--font-serif, 'Cormorant Garamond', serif);
+  font-size: clamp(28px, 2.8vw, 40px);
+  font-weight: 400;
+  color: var(--wyld-ink, #1F1B17);
+  margin: 0 auto 20px;
+  max-width: 580px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.wyld-homepage-v17 .wyld-bundles-cta-blurb {
+  font-family: var(--font-body-family, 'Jost', sans-serif);
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--wyld-stone, #5F574D);
+  margin: 0 auto 40px;
+  max-width: 540px;
+  line-height: 1.7;
+}
+.wyld-homepage-v17 .wyld-bundles-cta-button,
+.wyld-bundles-cta a.wyld-bundles-cta-button {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 14px;
+  color: #FAF6EE !important;
+  background: #2E332C !important;
+  background-image: none !important;
+  border: 1px solid #2E332C !important;
+  padding: 20px 56px !important;
+  font-family: var(--font-body-family, 'Jost', sans-serif) !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.22em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  transition: all 320ms cubic-bezier(.22,.61,.36,1) !important;
+  box-shadow: 0 4px 14px rgba(31, 27, 23, 0.12) !important;
+  white-space: nowrap;
+}
+.wyld-homepage-v17 .wyld-bundles-cta-button:hover,
+.wyld-bundles-cta a.wyld-bundles-cta-button:hover {
+  background: #1F2722 !important;
+  box-shadow: 0 8px 26px rgba(31, 27, 23, 0.20) !important;
+  transform: translateY(-1px);
+}
+.wyld-homepage-v17 .wyld-bundles-cta-foot {
+  margin: 32px 0 0;
+  font-family: var(--font-body-family, 'Jost', sans-serif);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  color: var(--wyld-stone, #5F574D);
+}
+.wyld-homepage-v17 .wyld-bundles-cta-foot span {
+  margin: 0 10px;
+  color: rgba(31, 27, 23, 0.3);
+}
+@media (max-width: 768px) {
+  .wyld-homepage-v17 .wyld-bundles-cta { margin-top: 64px; padding: 56px 24px 48px; }
+  .wyld-homepage-v17 .wyld-bundles-cta-button { padding: 17px 38px !important; }
+  .wyld-homepage-v17 .wyld-bundles-cta-foot { font-size: 10px; letter-spacing: 1px; }
+  .wyld-homepage-v17 .wyld-bundles-cta-foot span { margin: 0 6px; }
+}
+
+/* === Subscribe & Save pill — visual placeholder, wired to Loop later ===
+   Sits below price on subscribable product cards. Outlined rose pill. */
+.wyld-sub-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 4px 10px;
+  font-family: var(--font-body-family, 'Jost', sans-serif);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--wyld-rose, #9A6B65);
+  background: rgba(154, 107, 101, 0.06);
+  border: 1px solid rgba(154, 107, 101, 0.28);
+  border-radius: 100px;
+  line-height: 1;
+}
+.wyld-sub-pill::before {
+  content: "↻";
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* === Quiz banner ("Find Your Wyld Routine" on collection/product pages) ===
+   Defensive selectors — restyle the dark pill button to outlined cream slide-fill matching site language. */
+section[class*="quiz"] a[href*="routine-quiz"],
+section[class*="quiz-banner"] a,
+.quiz-banner a[href*="quiz"],
+[class*="find-your-wyld-routine"] a {
+  background: linear-gradient(to right, #FAF6EE 50%, transparent 50%) !important;
+  background-color: transparent !important;
+  background-size: 220% 100% !important;
+  background-position: right bottom !important;
+  color: #FAF6EE !important;
+  border: 1px solid #FAF6EE !important;
+  border-radius: 0 !important;
+  padding: 16px 32px !important;
+  font-family: var(--font-subheading-family) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  transition: background-position 600ms cubic-bezier(.22,.61,.36,1), color 600ms cubic-bezier(.22,.61,.36,1) !important;
+}
+section[class*="quiz"] a[href*="routine-quiz"]:hover,
+section[class*="quiz-banner"] a:hover,
+.quiz-banner a[href*="quiz"]:hover,
+[class*="find-your-wyld-routine"] a:hover {
+  background-position: left bottom !important;
+  color: #2E332C !important;
+}
+
+
+
+/* ============================================================
+   Wyld Judge.me Stars — canonical review-stars display (site-wide)
+   Rendered by snippets/wyld-judgeme-stars.liquid
+   Format: ★ 4.9 · 172   (gold star + rating + middle-dot + count)
+   Added 2026-07-08
+   ============================================================ */
+.wyld-jm-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: "Jost", sans-serif;
+  color: #2B2522;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-decoration: none;
+}
+a.wyld-jm-stars { cursor: pointer; }
+a.wyld-jm-stars:hover .wyld-jm-stars__count,
+a.wyld-jm-stars:focus .wyld-jm-stars__count {
+  text-decoration: underline;
+}
+.wyld-jm-stars__star { color: #E8B544; letter-spacing: 0; }
+.wyld-jm-stars__rating { font-weight: 500; }
+.wyld-jm-stars__sep { color: rgba(43, 37, 34, 0.45); margin: 0 1px; }
+.wyld-jm-stars__count { color: rgba(43, 37, 34, 0.62); }
+
+/* Sizes */
+.wyld-jm-stars--small  { font-size: 12px; }
+.wyld-jm-stars--small  .wyld-jm-stars__star { font-size: 13px; }
+.wyld-jm-stars--medium { font-size: 14px; }
+.wyld-jm-stars--medium .wyld-jm-stars__star { font-size: 15px; }
+.wyld-jm-stars--large  { font-size: 16px; }
+.wyld-jm-stars--large  .wyld-jm-stars__star { font-size: 18px; }
+
+/* Alignment (uses margin auto because it's inline-flex) */
+.wyld-jm-stars--left   { }
+.wyld-jm-stars--center { display: flex; justify-content: center; }
+.wyld-jm-stars--right  { display: flex; justify-content: flex-end; }
